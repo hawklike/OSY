@@ -1,0 +1,3 @@
+/home/hawklike/skola/OSY/cviceni1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/hawklike/skola/OSY/cviceni1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/hawklike/skola/OSY/cviceni1/cmake-build-debug/CMakeFiles/cviceni1.dir
