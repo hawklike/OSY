@@ -14,6 +14,54 @@
 # EXTERNAL cache entries
 ########################
 
+//Boost components library (debug)
+Boost_COMPONENTS_LIBRARY_DEBUG:FILEPATH=Boost_COMPONENTS_LIBRARY_DEBUG-NOTFOUND
+
+//Boost components library (release)
+Boost_COMPONENTS_LIBRARY_RELEASE:FILEPATH=Boost_COMPONENTS_LIBRARY_RELEASE-NOTFOUND
+
+//The directory containing a CMake configuration file for Boost.
+Boost_DIR:PATH=Boost_DIR-NOTFOUND
+
+//Path to a file.
+Boost_INCLUDE_DIR:PATH=/usr/include
+
+//Boost like library (debug)
+Boost_LIKE_LIBRARY_DEBUG:FILEPATH=Boost_LIKE_LIBRARY_DEBUG-NOTFOUND
+
+//Boost like library (release)
+Boost_LIKE_LIBRARY_RELEASE:FILEPATH=Boost_LIKE_LIBRARY_RELEASE-NOTFOUND
+
+//Boost link library (debug)
+Boost_LINK_LIBRARY_DEBUG:FILEPATH=Boost_LINK_LIBRARY_DEBUG-NOTFOUND
+
+//Boost link library (release)
+Boost_LINK_LIBRARY_RELEASE:FILEPATH=Boost_LINK_LIBRARY_RELEASE-NOTFOUND
+
+//Boost to library (debug)
+Boost_TO_LIBRARY_DEBUG:FILEPATH=Boost_TO_LIBRARY_DEBUG-NOTFOUND
+
+//Boost to library (release)
+Boost_TO_LIBRARY_RELEASE:FILEPATH=Boost_TO_LIBRARY_RELEASE-NOTFOUND
+
+//Boost with library (debug)
+Boost_WITH_LIBRARY_DEBUG:FILEPATH=Boost_WITH_LIBRARY_DEBUG-NOTFOUND
+
+//Boost with library (release)
+Boost_WITH_LIBRARY_RELEASE:FILEPATH=Boost_WITH_LIBRARY_RELEASE-NOTFOUND
+
+//Boost would library (debug)
+Boost_WOULD_LIBRARY_DEBUG:FILEPATH=Boost_WOULD_LIBRARY_DEBUG-NOTFOUND
+
+//Boost would library (release)
+Boost_WOULD_LIBRARY_RELEASE:FILEPATH=Boost_WOULD_LIBRARY_RELEASE-NOTFOUND
+
+//Boost you library (debug)
+Boost_YOU_LIBRARY_DEBUG:FILEPATH=Boost_YOU_LIBRARY_DEBUG-NOTFOUND
+
+//Boost you library (release)
+Boost_YOU_LIBRARY_RELEASE:FILEPATH=Boost_YOU_LIBRARY_RELEASE-NOTFOUND
+
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
@@ -194,6 +242,9 @@ ProcessorCount_cmd_getconf:FILEPATH=/usr/bin/getconf
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/sbin/sysctl
 
+//Path to a file.
+SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
+
 //Value Computed by CMake
 cviceni1_BINARY_DIR:STATIC=/home/hawklike/skola/OSY/cviceni1/cmake-build-debug
 
@@ -205,6 +256,38 @@ cviceni1_SOURCE_DIR:STATIC=/home/hawklike/skola/OSY/cviceni1
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: Boost_COMPONENTS_LIBRARY_DEBUG
+Boost_COMPONENTS_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_COMPONENTS_LIBRARY_RELEASE
+Boost_COMPONENTS_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_DIR
+Boost_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_INCLUDE_DIR
+Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_LIKE_LIBRARY_DEBUG
+Boost_LIKE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_LIKE_LIBRARY_RELEASE
+Boost_LIKE_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_LINK_LIBRARY_DEBUG
+Boost_LINK_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_LINK_LIBRARY_RELEASE
+Boost_LINK_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_TO_LIBRARY_DEBUG
+Boost_TO_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_TO_LIBRARY_RELEASE
+Boost_TO_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_WITH_LIBRARY_DEBUG
+Boost_WITH_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_WITH_LIBRARY_RELEASE
+Boost_WITH_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_WOULD_LIBRARY_DEBUG
+Boost_WOULD_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_WOULD_LIBRARY_RELEASE
+Boost_WOULD_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_YOU_LIBRARY_DEBUG
+Boost_YOU_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_YOU_LIBRARY_RELEASE
+Boost_YOU_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created
@@ -352,4 +435,12 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
 ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
+//Components requested for this build tree.
+_Boost_COMPONENTS_SEARCHED:INTERNAL=components;like;link;to;with;would;you
+//Last used Boost_INCLUDE_DIR value.
+_Boost_INCLUDE_DIR_LAST:INTERNAL=/usr/include
+//Last used Boost_NAMESPACE value.
+_Boost_NAMESPACE_LAST:INTERNAL=boost
+//Last used Boost_USE_MULTITHREADED value.
+_Boost_USE_MULTITHREADED_LAST:INTERNAL=TRUE
 

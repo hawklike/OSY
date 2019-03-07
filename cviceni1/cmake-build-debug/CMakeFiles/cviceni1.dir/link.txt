@@ -1,1 +1,1 @@
-/usr/bin/c++   -Wall -pedantic -lm -g   CMakeFiles/cviceni1.dir/main.cpp.o  -o cviceni1 
+/usr/bin/c++   -Wall -pedantic -lm -pthread -g   CMakeFiles/cviceni1.dir/main.cpp.o  -o cviceni1 
