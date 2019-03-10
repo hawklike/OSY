@@ -12,29 +12,50 @@ public:
     {
         double partition = static_cast<double>(m)/n;
         auto lowerPart = static_cast<uint32_t>(floor(partition));
-        auto upperPart = static_cast<uint32_t>(ceil(partition));
-
 
         for(short i = 0; i < nThreads; i++)
         {
             uint32_t start, end;
-            start = i * lowerPart + 1;
-            end = i == 0 ? start + upperPart : start + lowerPart;
+            start = i == 0 ? 0 : i * lowerPart + 1;
+            end = i == 0 ? lowerPart : start + lowerPart - 1;
 
-            threads.emplace_back(std::thread(&CThreadManager::sum, std::ref(start), std::ref(end)));
-
+            threads.emplace_back(std::thread(&CThreadManager::sum, this, std::ref(start), std::ref(end)));
         }
+    }
 
+    void finishThreads()
+    {
+        for(auto &it : threads)
+            if(it.joinable()) it.join();
+
+        std::cout << "total: " << total << std::endl;
+    }
+
+    void referenceCount(uint32_t m)
+    {
+        double total = 0;
+        for(uint32_t i = 0; i < m; i++)
+            total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
+
+        std::cout << "referenced count: " << total << std::endl;
     }
 
 private:
-    static void sum(const uint32_t &start, const uint32_t &end)
+    void sum(const uint32_t &start, const uint32_t &end)
     {
+        double tmp = 0;
+        for(uint32_t i = start; i <= end; i++)
+        {
+            tmp += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
+        }
 
+        std::cout << tmp << std::endl;
+        total += tmp;
     }
 
     uint32_t m;
     uint16_t n;
+    double total = 0;
     std::vector<std::thread> threads;
 
 };
@@ -47,8 +68,8 @@ int main(int argc, const char* args[])
 
     CThreadManager sumCounter(m, n);
     sumCounter.startThreads(n);
-
-//    std::cout << args[1] << " " << args[2] << std::endl;
+    sumCounter.finishThreads();
+    sumCounter.referenceCount(m);
 
     return 0;
 }
