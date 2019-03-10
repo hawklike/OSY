@@ -19,7 +19,7 @@ public:
             start = i == 0 ? 0 : i * lowerPart + 1;
             end = i == 0 ? lowerPart : start + lowerPart - 1;
 
-            threads.emplace_back(std::thread(&CThreadManager::sum, this, std::ref(start), std::ref(end)));
+            threads.emplace_back(std::thread(&CThreadManager::sum, this, start, end));
         }
     }
 
@@ -31,7 +31,7 @@ public:
         std::cout << "total: " << total << std::endl;
     }
 
-    void referenceCount(uint32_t m)
+    void referenceCount(uint32_t m) const
     {
         double total = 0;
         for(uint32_t i = 0; i < m; i++)
@@ -41,16 +41,10 @@ public:
     }
 
 private:
-    void sum(const uint32_t &start, const uint32_t &end)
+    void sum(const uint32_t start, const uint32_t end)
     {
-        double tmp = 0;
         for(uint32_t i = start; i <= end; i++)
-        {
-            tmp += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
-        }
-
-        std::cout << tmp << std::endl;
-        total += tmp;
+            total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
     }
 
     uint32_t m;
@@ -62,14 +56,8 @@ private:
 
 void count(double& total, uint32_t start, uint32_t end)
 {
-    double tmp = 0;
     for(uint32_t i = start; i <= end; i++)
-    {
-        tmp += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
-    }
-
-    std::cout << tmp << std::endl;
-    total += tmp;
+        total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
 }
 
 int main(int argc, const char* args[])
@@ -98,6 +86,6 @@ int main(int argc, const char* args[])
 
     for(auto& it : threads) if(it.joinable()) it.join();
 
-    std::cout << total << std::endl;
+    std::cout << "total: " << total << std::endl;
     return 0;
 }
