@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include <cmath>
+#include <chrono>
 
 class CThreadManager
 {
@@ -43,6 +44,8 @@ public:
 private:
     void sum(const uint32_t start, const uint32_t end)
     {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::cout << "start: " << start << " end: " << end << std::endl;
         for(uint32_t i = start; i <= end; i++)
             total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
     }
@@ -68,24 +71,24 @@ int main(int argc, const char* args[])
     double total = 0;
 
     CThreadManager sumCounter(m, n);
-//    sumCounter.startThreads(n);
-//    sumCounter.finishThreads();
+    sumCounter.startThreads(n);
+    sumCounter.finishThreads();
     sumCounter.referenceCount(m);
 
-    double partition = static_cast<double>(m)/n;
-    auto lowerPart = static_cast<uint32_t>(floor(partition));
-
-    std::vector<std::thread> threads;
-    for(uint16_t i = 0; i < n; i++)
-    {
-        uint32_t start, end;
-        start = i == 0 ? 0 : i * lowerPart + 1;
-        end = i == 0 ? lowerPart : start + lowerPart - 1;
-        threads.emplace_back(std::thread(count, std::ref(total), start, end));
-    }
-
-    for(auto& it : threads) if(it.joinable()) it.join();
-
-    std::cout << "total: " << total << std::endl;
+//    double partition = static_cast<double>(m)/n;
+//    auto lowerPart = static_cast<uint32_t>(floor(partition));
+//
+//    std::vector<std::thread> threads;
+//    for(uint16_t i = 0; i < n; i++)
+//    {
+//        uint32_t start, end;
+//        start = i == 0 ? 0 : i * lowerPart + 1;
+//        end = i == 0 ? lowerPart : start + lowerPart - 1;
+//        threads.emplace_back(std::thread(count, std::ref(total), start, end));
+//    }
+//
+//    for(auto& it : threads) if(it.joinable()) it.join();
+//
+//    std::cout << "total: " << total << std::endl;
     return 0;
 }
