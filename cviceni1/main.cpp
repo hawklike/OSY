@@ -18,9 +18,7 @@ public:
 
         for(short i = 0; i < nThreads; i++)
         {
-            if(remainder-- > 0) end = start + unifDistribution;
-            else                end = start + unifDistribution - 1;
-
+            end = start + unifDistribution - ((remainder--) <= 0);
             threads.emplace_back(std::thread(&CThreadManager::sum, this, start, end));
             start = end + 1;
         }
@@ -56,7 +54,7 @@ private:
 
     uint32_t upperLimit;
     uint16_t nThreads;
-    double total = 0;
+    long double total = 0;
     std::mutex mutex;
     std::vector<std::thread> threads;
 
@@ -74,8 +72,22 @@ int main(int argc, const char* args[])
     uint16_t n = static_cast<uint16_t>(std::stoi(args[2]));
 
     CThreadManager sumCounter(m, n);
+
+    auto start = std::chrono::system_clock::now();
+
     sumCounter.startThreads();
     sumCounter.finishThreads();
+
+    auto threadsTime = std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::system_clock::now() - start);
+    std::cout << "time using threads: " << threadsTime.count() << " milliseconds" << std::endl;
+
+
+    start = std::chrono::system_clock::now();
+
     sumCounter.referenceCount(m);
+
+    threadsTime = std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::system_clock::now() - start);
+    std::cout << "time without threads: " << threadsTime.count() << " milliseconds" << std::endl;
+
     return 0;
 }
