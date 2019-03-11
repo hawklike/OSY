@@ -7,20 +7,22 @@
 class CThreadManager
 {
 public:
-    CThreadManager(uint32_t m, uint16_t n) : m(m), n(n) {}
+    CThreadManager(uint32_t m, uint16_t n) : upperLimit(m), nThreads(n) {}
 
-    void startThreads(const short nThreads)
+    void startThreads()
     {
-        double partition = static_cast<double>(m)/n;
-        auto lowerPart = static_cast<uint32_t>(floor(partition));
+        int remainder = upperLimit % nThreads;
+        uint32_t unifDistribution = (upperLimit - remainder) / nThreads;
+        uint32_t start = 0, end = 0;
 
         for(short i = 0; i < nThreads; i++)
         {
-            uint32_t start, end;
-            start = i == 0 ? 0 : i * lowerPart + 1;
-            end = i == 0 ? lowerPart : start + lowerPart - 1;
+            if(remainder-- > 0) end = start + unifDistribution;
+            else                end = start + unifDistribution - 1;
 
             threads.emplace_back(std::thread(&CThreadManager::sum, this, start, end));
+
+            start = end + 1;
         }
     }
 
@@ -50,8 +52,8 @@ private:
             total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
     }
 
-    uint32_t m;
-    uint16_t n;
+    uint32_t upperLimit;
+    uint16_t nThreads;
     double total = 0;
     std::vector<std::thread> threads;
 
@@ -71,7 +73,7 @@ int main(int argc, const char* args[])
     double total = 0;
 
     CThreadManager sumCounter(m, n);
-    sumCounter.startThreads(n);
+    sumCounter.startThreads();
     sumCounter.finishThreads();
     sumCounter.referenceCount(m);
 
@@ -79,7 +81,7 @@ int main(int argc, const char* args[])
 //    auto lowerPart = static_cast<uint32_t>(floor(partition));
 //
 //    std::vector<std::thread> threads;
-//    for(uint16_t i = 0; i < n; i++)
+//    for(uint16_t i = 0; i < nThreads; i++)
 //    {
 //        uint32_t start, end;
 //        start = i == 0 ? 0 : i * lowerPart + 1;
