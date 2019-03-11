@@ -3,6 +3,7 @@
 #include <thread>
 #include <cmath>
 #include <chrono>
+#include <mutex>
 
 class CThreadManager
 {
@@ -46,12 +47,17 @@ private:
     void sum(const uint32_t start, const uint32_t end)
     {
         for(uint32_t i = start; i <= end; i++)
+        {
+            mutex.lock();
             total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
+            mutex.unlock();
+        }
     }
 
     uint32_t upperLimit;
     uint16_t nThreads;
     double total = 0;
+    std::mutex mutex;
     std::vector<std::thread> threads;
 
 };
