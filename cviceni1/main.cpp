@@ -24,11 +24,6 @@ public:
         }
     }
 
-
-    ahoj
-    jak __io_seek_fn;
-
-
     void finishThreads()
     {
         for(auto &it : threads)
