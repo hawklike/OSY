@@ -44,7 +44,7 @@ public:
 private:
     void sum(const uint32_t start, const uint32_t end)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+//        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         std::cout << "start: " << start << " end: " << end << std::endl;
         for(uint32_t i = start; i <= end; i++)
             total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
