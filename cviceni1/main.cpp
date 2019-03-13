@@ -4,6 +4,7 @@
 #include <cmath>
 #include <chrono>
 #include <mutex>
+#include <iomanip>
 
 class CThreadManager
 {
@@ -29,7 +30,7 @@ public:
         for(auto &it : threads)
             if(it.joinable()) it.join();
 
-        std::cout << "total: " << total << std::endl;
+        std::cout << "total: " << std::setprecision(10) << total << std::endl;
     }
 
     void referenceCount(uint32_t m) const
@@ -38,7 +39,7 @@ public:
         for(uint32_t i = 0; i < m; i++)
             total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
 
-        std::cout << "referenced count: " << total << std::endl;
+        std::cout << "referenced count: " << std::setprecision(10) << total << std::endl;
     }
 
 private:
@@ -75,8 +76,8 @@ int main(int argc, const char* args[])
 
     auto start = std::chrono::system_clock::now();
 
-    sumCounter.startThreads();
-    sumCounter.finishThreads();
+//    sumCounter.startThreads();
+//    sumCounter.finishThreads();
 
     auto threadsTime = std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::system_clock::now() - start);
     std::cout << "time using threads: " << threadsTime.count() << " milliseconds" << std::endl;
