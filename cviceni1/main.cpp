@@ -20,7 +20,7 @@ public:
         for(short i = 0; i < nThreads; i++)
         {
             end = start + unifDistribution - ((remainder--) <= 0);
-            threads.emplace_back(std::thread(&CThreadManager::sum, this, start, end));
+            threads.emplace_back(std::thread(&CThreadManager::sumThreadsFunc, this, start, end));
             start = end + 1;
         }
     }
@@ -43,19 +43,22 @@ public:
     }
 
 private:
-    void sum(const uint32_t start, const uint32_t end)
+    void sumThreadsFunc(const uint32_t start, const uint32_t end)
     {
+        double tmp_total = 0;
         for(uint32_t i = start; i <= end; i++)
         {
-            mutex.lock();
-            total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
-            mutex.unlock();
+            tmp_total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
         }
+
+        std::unique_lock<std::mutex> locker(mutex);
+        total += tmp_total;
     }
 
     uint32_t upperLimit;
     uint16_t nThreads;
     long double total = 0;
+
     std::mutex mutex;
     std::vector<std::thread> threads;
 
@@ -76,8 +79,8 @@ int main(int argc, const char* args[])
 
     auto start = std::chrono::system_clock::now();
 
-//    sumCounter.startThreads();
-//    sumCounter.finishThreads();
+    sumCounter.startThreads();
+    sumCounter.finishThreads();
 
     auto threadsTime = std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::system_clock::now() - start);
     std::cout << "time using threads: " << threadsTime.count() << " milliseconds" << std::endl;
