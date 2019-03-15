@@ -30,7 +30,7 @@ public:
         for(auto &it : threads)
             if(it.joinable()) it.join();
 
-        std::cout << "total: " << std::setprecision(10) << total << std::endl;
+        std::cout << "total: " << std::setprecision(12) << total << std::endl;
     }
 
     void referenceCount(uint32_t m) const
@@ -39,7 +39,7 @@ public:
         for(uint32_t i = 0; i < m; i++)
             total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
 
-        std::cout << "referenced count: " << std::setprecision(10) << total << std::endl;
+        std::cout << "referenced count: " << std::setprecision(12) << total << std::endl;
     }
 
 private:
@@ -57,7 +57,7 @@ private:
 
     uint32_t upperLimit;
     uint16_t nThreads;
-    long double total = 0;
+    double total = 0;
 
     std::mutex mutex;
     std::vector<std::thread> threads;
@@ -84,7 +84,6 @@ int main(int argc, const char* args[])
 
     auto threadsTime = std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::system_clock::now() - start);
     std::cout << "time using threads: " << threadsTime.count() << " milliseconds" << std::endl;
-
 
     start = std::chrono::system_clock::now();
 
