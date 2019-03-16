@@ -5,6 +5,7 @@
 #include <chrono>
 #include <mutex>
 #include <iomanip>
+#include <atomic>
 
 class CThreadManager
 {
@@ -51,15 +52,16 @@ private:
             tmp_total += (sqrt(i+1) + i) / sqrt(pow(i,2) + i + 1);
         }
 
-        std::unique_lock<std::mutex> locker(mutex);
-        total += tmp_total;
+        //obscure construction because atomic<double> doesn't provide operator +=
+        double tmp_load = total.load();
+        tmp_load += tmp_total;
+        total.store(tmp_load);
     }
 
     uint32_t upperLimit;
     uint16_t nThreads;
-    double total = 0;
 
-    std::mutex mutex;
+    std::atomic<double> total{0};
     std::vector<std::thread> threads;
 
 };
