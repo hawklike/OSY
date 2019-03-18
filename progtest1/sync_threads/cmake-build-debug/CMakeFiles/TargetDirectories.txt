@@ -1,0 +1,3 @@
+/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/CMakeFiles/sync_threads.dir

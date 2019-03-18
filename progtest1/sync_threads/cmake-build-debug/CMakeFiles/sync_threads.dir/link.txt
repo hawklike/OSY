@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -pedantic -lm -g   CMakeFiles/sync_threads.dir/solution.cpp.o CMakeFiles/sync_threads.dir/sample_tester.cpp.o  -o sync_threads  -L/home/hawklike/skola/OSY/progtest1/sync_threads -Wl,-rpath,/home/hawklike/skola/OSY/progtest1/sync_threads -lpthread -lprogtest_solver 

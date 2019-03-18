@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="sync_threads"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sync_threads">
+				<Option output="/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/sync_threads" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 sync_threads"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sync_threads/fast">
+				<Option output="/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/sync_threads" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 sync_threads/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/hawklike/skola/OSY/progtest1/sync_threads/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/hawklike/skola/OSY/progtest1/sync_threads/common.h">
+			<Option target="sync_threads"/>
+		</Unit>
+		<Unit filename="/home/hawklike/skola/OSY/progtest1/sync_threads/progtest_solver.h">
+			<Option target="sync_threads"/>
+		</Unit>
+		<Unit filename="/home/hawklike/skola/OSY/progtest1/sync_threads/sample_tester.cpp">
+			<Option target="sync_threads"/>
+		</Unit>
+		<Unit filename="/home/hawklike/skola/OSY/progtest1/sync_threads/sample_tester.h">
+			<Option target="sync_threads"/>
+		</Unit>
+		<Unit filename="/home/hawklike/skola/OSY/progtest1/sync_threads/solution.cpp">
+			<Option target="sync_threads"/>
+		</Unit>
+		<Unit filename="/home/hawklike/skola/OSY/progtest1/sync_threads/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
