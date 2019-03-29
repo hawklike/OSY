@@ -36,8 +36,8 @@ void * prodFunc ( intptr_t  id )
     g_Buffer[g_Pos] . m_ID  = id;
     g_Buffer[g_Pos] . m_Val = i;
     g_Pos ++;
-    sem_post ( &g_Full );
     pthread_mutex_unlock ( &g_Mtx );
+    sem_post ( &g_Full );
     printf ( "Producer %d: saved item %d\n", (int)id, i);
   }
   return NULL;
