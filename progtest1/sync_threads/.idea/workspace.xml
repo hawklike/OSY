@@ -12,15 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../cviceni1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../cviceni1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../cviceni1/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../cviceni1/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../cviceni1/cmake-build-debug/CMakeFiles/cviceni1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../cviceni1/cmake-build-debug/CMakeFiles/cviceni1.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../cviceni1/cmake-build-debug/cviceni1" beforeDir="false" afterPath="$PROJECT_DIR$/../../cviceni1/cmake-build-debug/cviceni1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sample/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../sample/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sample/libprogtest_solver.a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sample/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../sample/solution.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proseminare/p02-examples/train4.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../proseminare/p02-examples/train4.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,14 +35,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="510">
+              <caret line="56" column="19" lean-forward="true" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
-                <marker date="1553620055091" expanded="true" signature="21:553" ph="..." />
+                <marker date="1553874877102" expanded="false" signature="21:553" ph="..." />
               </folding>
             </state>
           </provider>
@@ -64,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name="common.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="84" column="36" lean-forward="true" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+            <state relative-caret-position="481">
+              <caret line="95" column="59" selection-start-line="95" selection-start-column="59" selection-end-line="95" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -76,8 +69,8 @@
       <file leaf-file-name="sample_tester.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample_tester.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+            <state relative-caret-position="493">
+              <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -85,7 +78,7 @@
       <file leaf-file-name="sample_tester.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
+            <state relative-caret-position="408">
               <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
             </state>
           </provider>
@@ -101,8 +94,8 @@
       <list>
         <option value="$PROJECT_DIR$/sample_tester.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/solution.cpp" />
         <option value="$PROJECT_DIR$/common.h" />
+        <option value="$PROJECT_DIR$/solution.cpp" />
       </list>
     </option>
   </component>
@@ -116,10 +109,11 @@
     <packageJsonPaths />
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="5">
-    <option name="y" value="24" />
-    <option name="width" value="960" />
-    <option name="height" value="993" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="108" />
+    <option name="y" value="-33" />
+    <option name="width" value="962" />
+    <option name="height" value="986" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -127,6 +121,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -138,11 +133,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="orderl&#9;null&#9;null&#10;pric&#9;null&#9;null&#10;order&#9;null&#9;null&#10;corder&#9;null&#9;null&#10;wait&#9;null&#9;null&#10;sol&#9;FILE&#9;file:///home/hawklike/skola/OSY/progtest1/sync_threads/solution.cpp&#10;soluti&#9;FILE&#9;file:///home/hawklike/skola/OSY/progtest1/sync_threads/solution.cpp&#10;aproduce&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="producer&#9;null&#9;null&#10;spaces&#9;null&#9;null&#10;orderl&#9;null&#9;null&#10;pric&#9;null&#9;null&#10;order&#9;null&#9;null&#10;corder&#9;null&#9;null&#10;wait&#9;null&#9;null&#10;sol&#9;FILE&#9;file:///home/hawklike/skola/OSY/progtest1/sync_threads/solution.cpp&#10;soluti&#9;FILE&#9;file:///home/hawklike/skola/OSY/progtest1/sync_threads/solution.cpp&#10;aproduce&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -182,24 +176,25 @@
       <workItem from="1553617344450" duration="690000" />
       <workItem from="1553618674751" duration="4981000" />
       <workItem from="1553683260619" duration="4697000" />
-      <workItem from="1553716365759" duration="1921000" />
+      <workItem from="1553716365759" duration="2490000" />
+      <workItem from="1553873774385" duration="1102000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14361000" />
+    <option name="totallyTimeSpent" value="16032000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="960" height="993" extended-state="5" />
+    <frame x="-1" y="-4" width="1922" height="1022" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4970964" weight="0.25540897" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49550563" visible="true" weight="0.16974169" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.32847533" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32921347" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32921347" />
-      <window_info id="Structure" order="1" sideWeight="0.5029036" side_tool="true" weight="0.25454545" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.50449437" side_tool="true" visible="true" weight="0.16974169" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32921347" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -207,29 +202,29 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32921347" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32921347" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="CMake" order="4" weight="0.32908458" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.12915128" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="11" />
       <window_info anchor="bottom" id="Run" order="7" visible="true" weight="0.3295964" />
-      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Find" order="6" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.3295964" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="6" />
-      <window_info anchor="bottom" id="CMake" order="4" weight="0.32908458" />
+      <window_info anchor="bottom" id="Version Control" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.3295964" />
       <window_info id="Favorites" order="0" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -254,11 +249,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+          <folding>
+            <element signature="e#21#38#0" expanded="true" />
+            <marker date="1553874877102" expanded="false" signature="21:553" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/progtest_solver.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample_tester.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="84" column="36" lean-forward="true" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solution.cpp">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1553620055091" expanded="true" signature="21:553" ph="..." />
+            <marker date="1553874877102" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -332,7 +373,7 @@
           <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1553620055091" expanded="true" signature="21:553" ph="..." />
+            <marker date="1553874877102" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -371,7 +412,7 @@
           <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1553620055091" expanded="true" signature="21:553" ph="..." />
+            <marker date="1553874877102" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -410,7 +451,7 @@
           <caret line="62" column="11" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="11" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1553620055091" expanded="true" signature="21:553" ph="..." />
+            <marker date="1553874877102" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -438,35 +479,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sample_tester.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        <state relative-caret-position="493">
+          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/solution.cpp">
+    <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
-          <folding>
-            <element signature="e#21#38#0" expanded="true" />
-            <marker date="1553620055091" expanded="true" signature="21:553" ph="..." />
-          </folding>
+        <state relative-caret-position="408">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/common.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="84" column="36" lean-forward="true" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+        <state relative-caret-position="481">
+          <caret line="95" column="59" selection-start-line="95" selection-start-column="59" selection-end-line="95" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solution.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="56" column="19" lean-forward="true" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
+          <folding>
+            <element signature="e#21#38#0" expanded="true" />
+            <marker date="1553874877102" expanded="false" signature="21:553" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

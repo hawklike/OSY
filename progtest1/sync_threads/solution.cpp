@@ -29,17 +29,44 @@
 using namespace std;
 #endif /* __PROGTEST__ */
 
+class CCustomerThreadWrapper
+{
+public:
+
+};
+
+class CProducerThreadWrapper
+{
+public:
+};
+
 class CWeldingCompany
 {
-  public:
-    static void              SeqSolve                      ( APriceList        priceList,
-                                                             COrder          & order );
-    void                     AddProducer                   ( AProducer         prod );
-    void                     AddCustomer                   ( ACustomer         cust );
-    void                     AddPriceList                  ( AProducer         prod,
-                                                             APriceList        priceList );
-    void                     Start                         ( unsigned          thrCount );
-    void                     Stop                          ( void );
+public:
+    static void SeqSolve(APriceList priceList, COrder& order);
+
+    void AddProducer(AProducer prod)
+    {
+      producers.emplace_back(prod);
+      nProducers++;
+    }
+
+    void AddCustomer(ACustomer cust)
+    {
+      customers.emplace_back(cust);
+      nCustomers++;
+    }
+
+    void AddPriceList(AProducer prod, APriceList priceList);
+    void Start(unsigned thrCount);
+    void Stop(void);
+
+private:
+    unsigned int nProducers = 0;
+    unsigned int nCustomers = 0;
+
+    std::vector<AProducer> producers;
+    std::vector<ACustomer> customers;
 };
 
 // TODO: CWeldingCompany implementation goes here
