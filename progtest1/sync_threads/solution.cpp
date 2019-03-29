@@ -62,36 +62,48 @@ public:
 
     void AddProducer(AProducer prod)
     {
-      producers.emplace_back(prod);
-      nProducers++;
+        producers.emplace_back(prod);
+        nProducers++;
     }
 
     void AddCustomer(ACustomer cust)
     {
-      customers.emplace_back(cust);
-      nCustomers++;
+        customers.emplace_back(cust);
+        nCustomers++;
     }
 
     void AddPriceList(AProducer prod, APriceList priceList);
 
     void Start(unsigned thrCount)
     {
-      {
-        //      customerWrapper = std::make_unique<CCustomerThreadWrapper>(nCustomers);
-        //      producerWrapper = std::make_unique<CProducerThreadWrapper>(thrCount);
-      }
+        for(uint c = 0; c < nCustomers; c++)
+            customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, std::ref(c)));
 
-      for(uint c = 0; c < nCustomers; c++)
-        customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, c));
-
-      for(uint p = 0; p < thrCount; p++)
-        producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
+        for(uint p = 0; p < thrCount; p++)
+            producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
 
     }
 
     void Stop(void);
 
 private:
+    //thread serving for customers
+    void handleDemands(const uint& idCustomer)
+    {
+        AOrderList orderList;
+        while((orderList = customers[idCustomer].get()->WaitForDemand()) != nullptr)
+        {
+            std::unique_lock<std::mutex> lockC(mutexC);
+            buffer.push(std::make_pair(idCustomer, orderList));
+        }
+    }
+
+    //thread serving for producers
+    void evaluateOrders()
+    {
+
+    }
+
     unsigned int nProducers = 0;
     unsigned int nCustomers = 0;
 
@@ -101,18 +113,11 @@ private:
     std::vector<std::thread> customerThreads;
     std::vector<std::thread> producerThreads;
 
-    //thread serving for customers
-    void handleDemands(uint idCustomer)
-    {
+    std::queue<std::pair<uint, AOrderList>> buffer;
 
-    }
-
-    void evaluateOrders()
-    {
-
-    }
-    //    std::unique_ptr<CCustomerThreadWrapper> customerWrapper;
-    //    std::unique_ptr<CProducerThreadWrapper> producerWrapper;
+    //thread stuff here
+    std::mutex mutexC;
+    std::mutex mutexP;
 };
 
 // TODO: CWeldingCompany implementation goes here
