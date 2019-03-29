@@ -76,12 +76,13 @@ public:
 
     void Start(unsigned thrCount)
     {
+        nProdThreads = thrCount;
+
         for(uint c = 0; c < nCustomers; c++)
             customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, std::ref(c)));
 
-        for(uint p = 0; p < thrCount; p++)
+        for(uint p = 0; p < nProdThreads; p++)
             producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
-
     }
 
     void Stop(void);
@@ -91,9 +92,15 @@ private:
     void handleDemands(const uint& idCustomer)
     {
         AOrderList orderList;
+        std::unique_lock<std::mutex> lockC(mutexC);
+
         while((orderList = customers[idCustomer].get()->WaitForDemand()) != nullptr)
         {
-            std::unique_lock<std::mutex> lockC(mutexC);
+            condPushingIntoBuffer.wait(lockC, [&buffer, &nProdThreads] ()
+            {
+                return buffer.size() < nProdThreads;
+            });
+
             buffer.push(std::make_pair(idCustomer, orderList));
         }
     }
@@ -106,6 +113,7 @@ private:
 
     unsigned int nProducers = 0;
     unsigned int nCustomers = 0;
+    unsigned int nProdThreads;
 
     std::vector<AProducer> producers;
     std::vector<ACustomer> customers;
@@ -118,6 +126,9 @@ private:
     //thread stuff here
     std::mutex mutexC;
     std::mutex mutexP;
+
+    std::condition_variable condPushingIntoBuffer;
+    std::condition_variable condPopingFromBuffer;
 };
 
 // TODO: CWeldingCompany implementation goes here
