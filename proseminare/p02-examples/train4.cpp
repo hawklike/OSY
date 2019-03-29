@@ -10,6 +10,7 @@
 #include <deque>
 #include <algorithm>
 #include <unistd.h>
+#include <iostream>
 using namespace std;
 
 const int PLATFORM_MAX = 3;
@@ -17,11 +18,11 @@ class CTrain
 {
   public:
                              CTrain ( int id )
-                             : m_ID ( id ), 
-                               m_Platform ( PLATFORM_MAX ) 
-    { 
+                             : m_ID ( id ),
+                               m_Platform ( PLATFORM_MAX )
+    {
     }
-    
+
     condition_variable       m_Cond;
     int                      m_ID;
     int                      m_Platform;
@@ -58,7 +59,9 @@ void displayStation ( void )
  */
 inline int findPlatform ( void )
 {
-  return find ( g_Platform, g_Platform + PLATFORM_MAX, 0 ) - g_Platform;
+  int tmp = find ( g_Platform, g_Platform + PLATFORM_MAX, 0 ) - g_Platform;
+  cout << "platform: " << tmp << endl;
+  return tmp;
 }
 /*---------------------------------------------------------------------------*/
 /* Prijezd do nadrazi
@@ -70,16 +73,16 @@ int waitStation ( int id )
   printf ( "Train %d arriving\n", id );
 
   int pl;
-  if ( g_Waiting . size () 
+  if ( g_Waiting . size ()
        || ( pl = findPlatform () ) == PLATFORM_MAX )
   {
     // Nadrazi je obsazeno. Vlak musi cekat.
     CTrain myself ( id );
     g_Waiting . push_back ( myself );
-  
+
     // Zobrazeni
     displayStation ();
-  
+
     // uspani & odemceni zamku, pri probuzeni kontrolujeme, ze jsme opravdu prvni na rade.
     // (Mohlo by se stat,
     // A pro extra spatne planovani by se mohlo stat, ze druhy probuzeny cekajici vlak
@@ -89,10 +92,10 @@ int waitStation ( int id )
       return ( pl = findPlatform () ) != PLATFORM_MAX
                && g_Waiting . front () . get () . m_ID == id; // tedy pokud nejsme prvni na rade nebo neni volno, zase se uspavame
     } );
-  
+
     // mame jistotu, ze odstranujeme sebe z fronty cekajicich
     g_Waiting . pop_front ();
-  
+
     // nepravdepodobne, ale mozne. Pokud by se podarilo probudit najednou dva cekajici vlaky
     // a druhy ve fronte by se dostal k CPU drive nez prvni, pak se opet uspal (podminka u cond_wait)
     // v takovem pripade by jej ale jiz nikdo neprobudil. Tedy z vlakna vlaku, ktery vjizdi na nadrazi
@@ -139,7 +142,7 @@ void train ( int id )
     int platform = waitStation ( id );
     // Nakladka/vykladka
     usleep ( 1000 * randomRange ( 1000, 5000 ) );
-  
+
     leaveStation ( platform );
     // Jizda vlaku
     usleep ( 1000 * randomRange ( 2000, 10000 ) );
@@ -151,7 +154,7 @@ int main ( int argc, char * argv [] )
   int thr;
   vector<thread> trains;
 
-  if ( argc != 2 
+  if ( argc != 2
        || sscanf ( argv[1], "%d", &thr ) != 1 )
   {
     printf ( "usage: %s <thr>\n", argv[0] );

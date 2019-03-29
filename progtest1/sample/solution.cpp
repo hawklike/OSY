@@ -27,7 +27,7 @@
 #include "progtest_solver.h"
 #include "sample_tester.h"
 using namespace std;
-#endif /* __PROGTEST__ */ 
+#endif /* __PROGTEST__ */
 
 class CWeldingCompany
 {
@@ -46,11 +46,11 @@ class CWeldingCompany
 
 //-------------------------------------------------------------------------------------------------
 #ifndef __PROGTEST__
-int                main                                    ( void )
+int                 main                                    ( void )
 {
   using namespace std::placeholders;
   CWeldingCompany  test;
-  
+
   AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
   AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
   test . AddProducer ( p1 );
@@ -60,6 +60,6 @@ int                main                                    ( void )
   test . Start ( 3 );
   test . Stop ();
   p2 -> Stop ();
-  return 0;  
+  return 0;
 }
-#endif /* __PROGTEST__ */ 
+#endif /* __PROGTEST__ */

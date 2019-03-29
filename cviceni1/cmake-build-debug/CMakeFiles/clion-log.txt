@@ -1,5 +1,4 @@
 /home/hawklike/Downloads/clion-2018.1.6/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/hawklike/skola/OSY/cviceni1
--- Boost version: 1.58.0
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/hawklike/skola/OSY/cviceni1/cmake-build-debug

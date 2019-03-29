@@ -2,30 +2,31 @@ CXX=g++
 LD=g++
 AR=ar
 CXXFLAGS=-std=c++14 -Wall -pedantic -O2
+SHELL:=/bin/bash
+MACHINE=$(shell uname -m)-$(shell echo $$OSTYPE)
 
 all: test
+
 
 deps:
 	g++ -MM *.cpp > Makefile.d
 
 test: solution.o sample_tester.o
-	$(LD) $(CXXFLAGS) -o $@ $^ -L. -lprogtest_solver -lpthread
+	$(LD) $(CXXFLAGS) -o $@ $^ -L./$(MACHINE) -lprogtest_solver -lpthread
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 lib: progtest_solver.o
-	$(AR) cfr libprogtest_solver.a $^
+	mkdir -p $(MACHINE)
+	$(AR) cfr $(MACHINE)/libprogtest_solver.a $^
 
 clean:
-	rm -f *.o test *~ core sample.tgz
+	rm -f *.o test *~ core sample.tgz Makefile.d
 	
-clear:
-	rm -f *.o test *~ core sample.tgz Makefile.d *.a
-	
-pack:
+pack: clean
 	rm -f sample.tgz
-	tar zcf sample.tgz *.h *.a Makefile* solution.cpp sample_tester.cpp
+	tar zcf sample.tgz --exclude progtest_solver.cpp *
 	
 
 -include Makefile.d
