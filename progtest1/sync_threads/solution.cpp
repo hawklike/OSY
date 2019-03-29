@@ -79,7 +79,7 @@ public:
         nProdThreads = thrCount;
 
         for(uint c = 0; c < nCustomers; c++)
-            customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, std::ref(c)));
+            customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, std::ref(customers[c])));
 
         for(uint p = 0; p < nProdThreads; p++)
             producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
@@ -89,19 +89,19 @@ public:
 
 private:
     //thread serving for customers
-    void handleDemands(const uint& idCustomer)
+    void handleDemands(const ACustomer& customer)
     {
         AOrderList orderList;
         std::unique_lock<std::mutex> lockC(mutexC);
 
-        while((orderList = customers[idCustomer].get()->WaitForDemand()) != nullptr)
+        while((orderList = customer.get()->WaitForDemand()) != nullptr)
         {
             cvFull.wait(lockC, [this] ()
             {
                 return buffer.size() < nProdThreads;
             });
 
-            buffer.push(std::make_pair(idCustomer, orderList));
+            buffer.push(std::make_pair(customer, orderList));
             cvEmpty.notify_one();
         }
     }
@@ -117,12 +117,13 @@ private:
     unsigned int nProdThreads;
 
     std::vector<AProducer> producers;
+    //useless
     std::vector<ACustomer> customers;
 
     std::vector<std::thread> customerThreads;
     std::vector<std::thread> producerThreads;
 
-    std::queue<std::pair<uint, AOrderList>> buffer;
+    std::queue<std::pair<ACustomer, AOrderList>> buffer;
 
     //thread stuff here
     std::mutex mutexC;
