@@ -29,24 +29,31 @@
 using namespace std;
 #endif /* __PROGTEST__ */
 
-class CCustomerThreadWrapper
-{
-public:
-    explicit CCustomerThreadWrapper(unsigned int nCustomers) : nCustomers(nCustomers) {}
-private:
-    unsigned int nCustomers;
-    std::vector<std::thread> customerThreads;
-};
-
-class CProducerThreadWrapper
-{
-public:
-    explicit CProducerThreadWrapper(unsigned int nProducers) : nProducers(nProducers) {}
-private:
-  unsigned int nProducers;
-  std::vector<std::thread> producerThreads;
-
-};
+// wrapper classes
+//class CCustomerThreadWrapper
+//{
+//public:
+//    explicit CCustomerThreadWrapper(unsigned int nCustomers) : nCustomerThreads(nCustomers) {}
+//
+//    void handleDemands()
+//    {
+//      AOrderList orderList;
+//    }
+//
+//private:
+//    unsigned int nCustomerThreads;
+//    std::vector<std::thread> customerThreads;
+//};
+//
+//class CProducerThreadWrapper
+//{
+//public:
+//    explicit CProducerThreadWrapper(unsigned int nProducers) : nProducerThreads(nProducers) {}
+//private:
+//  unsigned int nProducerThreads;
+//  std::vector<std::thread> producerThreads;
+//
+//};
 
 class CWeldingCompany
 {
@@ -69,9 +76,16 @@ public:
 
     void Start(unsigned thrCount)
     {
-      customerWrapper = std::make_unique<CCustomerThreadWrapper>(nCustomers);
-      producerWrapper = std::make_unique<CProducerThreadWrapper>(nProducers);
+      {
+        //      customerWrapper = std::make_unique<CCustomerThreadWrapper>(nCustomers);
+        //      producerWrapper = std::make_unique<CProducerThreadWrapper>(thrCount);
+      }
 
+      for(uint c = 0; c < nCustomers; c++)
+        customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, c));
+
+      for(uint p = 0; p < thrCount; p++)
+        producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
 
     }
 
@@ -84,8 +98,21 @@ private:
     std::vector<AProducer> producers;
     std::vector<ACustomer> customers;
 
-    std::unique_ptr<CCustomerThreadWrapper> customerWrapper;
-    std::unique_ptr<CProducerThreadWrapper> producerWrapper;
+    std::vector<std::thread> customerThreads;
+    std::vector<std::thread> producerThreads;
+
+    //thread serving for customers
+    void handleDemands(uint idCustomer)
+    {
+
+    }
+
+    void evaluateOrders()
+    {
+
+    }
+    //    std::unique_ptr<CCustomerThreadWrapper> customerWrapper;
+    //    std::unique_ptr<CProducerThreadWrapper> producerWrapper;
 };
 
 // TODO: CWeldingCompany implementation goes here
