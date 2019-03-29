@@ -96,12 +96,13 @@ private:
 
         while((orderList = customers[idCustomer].get()->WaitForDemand()) != nullptr)
         {
-            condPushingIntoBuffer.wait(lockC, [&buffer, &nProdThreads] ()
+            cvFull.wait(lockC, [this] ()
             {
                 return buffer.size() < nProdThreads;
             });
 
             buffer.push(std::make_pair(idCustomer, orderList));
+            cvEmpty.notify_one();
         }
     }
 
@@ -127,8 +128,8 @@ private:
     std::mutex mutexC;
     std::mutex mutexP;
 
-    std::condition_variable condPushingIntoBuffer;
-    std::condition_variable condPopingFromBuffer;
+    std::condition_variable cvFull;
+    std::condition_variable cvEmpty;
 };
 
 // TODO: CWeldingCompany implementation goes here

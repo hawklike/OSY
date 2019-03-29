@@ -12,7 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/sync_threads" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -32,13 +33,13 @@
       <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+            <state relative-caret-position="493">
+              <caret line="100" column="52" lean-forward="true" selection-start-line="100" selection-start-column="52" selection-end-line="100" selection-end-column="52" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
                 <element signature="e#602#621#0" />
-                <marker date="1553883397782" expanded="false" signature="21:553" ph="..." />
-                <marker date="1553883397782" expanded="true" signature="3019:3020" ph="{...}" />
+                <marker date="1553891581489" expanded="false" signature="21:553" ph="..." />
+                <marker date="1553891581489" expanded="true" signature="3019:3020" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -168,7 +169,7 @@
       <workItem from="1553618674751" duration="4981000" />
       <workItem from="1553683260619" duration="4697000" />
       <workItem from="1553716365759" duration="2490000" />
-      <workItem from="1553873774385" duration="9321000" />
+      <workItem from="1553873774385" duration="11427000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented addProducer/Customer">
       <created>1553874938238</created>
@@ -181,7 +182,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24251000" />
+    <option name="totallyTimeSpent" value="26357000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="960" height="993" extended-state="4" />
@@ -189,7 +190,7 @@
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49550563" weight="0.16974169" />
       <window_info anchor="bottom" id="TODO" order="8" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.32921347" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32868758" />
       <window_info anchor="bottom" id="CMake" order="10" weight="0.32847533" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32921347" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32921347" />
@@ -257,8 +258,8 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1553883397782" expanded="false" signature="21:553" ph="..." />
-            <marker date="1553883397782" expanded="true" signature="3019:3020" ph="{...}" />
+            <marker date="1553891581489" expanded="false" signature="21:553" ph="..." />
+            <marker date="1553891581489" expanded="true" signature="3019:3020" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -305,8 +306,8 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1553883397782" expanded="false" signature="21:553" ph="..." />
-            <marker date="1553883397782" expanded="true" signature="3019:3020" ph="{...}" />
+            <marker date="1553891581489" expanded="false" signature="21:553" ph="..." />
+            <marker date="1553891581489" expanded="true" signature="3019:3020" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -381,8 +382,8 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1553883397782" expanded="false" signature="21:553" ph="..." />
-            <marker date="1553883397782" expanded="true" signature="3019:3020" ph="{...}" />
+            <marker date="1553891581489" expanded="false" signature="21:553" ph="..." />
+            <marker date="1553891581489" expanded="true" signature="3019:3020" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -422,8 +423,8 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1553883397782" expanded="false" signature="21:553" ph="..." />
-            <marker date="1553883397782" expanded="true" signature="3019:3020" ph="{...}" />
+            <marker date="1553891581489" expanded="false" signature="21:553" ph="..." />
+            <marker date="1553891581489" expanded="true" signature="3019:3020" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -463,8 +464,8 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1553883397782" expanded="false" signature="21:553" ph="..." />
-            <marker date="1553883397782" expanded="true" signature="3019:3020" ph="{...}" />
+            <marker date="1553891581489" expanded="false" signature="21:553" ph="..." />
+            <marker date="1553891581489" expanded="true" signature="3019:3020" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -515,13 +516,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+        <state relative-caret-position="493">
+          <caret line="100" column="52" lean-forward="true" selection-start-line="100" selection-start-column="52" selection-end-line="100" selection-end-column="52" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1553883397782" expanded="false" signature="21:553" ph="..." />
-            <marker date="1553883397782" expanded="true" signature="3019:3020" ph="{...}" />
+            <marker date="1553891581489" expanded="false" signature="21:553" ph="..." />
+            <marker date="1553891581489" expanded="true" signature="3019:3020" ph="{...}" />
           </folding>
         </state>
       </provider>
