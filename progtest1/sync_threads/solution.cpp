@@ -32,12 +32,20 @@ using namespace std;
 class CCustomerThreadWrapper
 {
 public:
-
+    explicit CCustomerThreadWrapper(unsigned int nCustomers) : nCustomers(nCustomers) {}
+private:
+    unsigned int nCustomers;
+    std::vector<std::thread> customerThreads;
 };
 
 class CProducerThreadWrapper
 {
 public:
+    explicit CProducerThreadWrapper(unsigned int nProducers) : nProducers(nProducers) {}
+private:
+  unsigned int nProducers;
+  std::vector<std::thread> producerThreads;
+
 };
 
 class CWeldingCompany
@@ -58,7 +66,15 @@ public:
     }
 
     void AddPriceList(AProducer prod, APriceList priceList);
-    void Start(unsigned thrCount);
+
+    void Start(unsigned thrCount)
+    {
+      customerWrapper = std::make_unique<CCustomerThreadWrapper>(nCustomers);
+      producerWrapper = std::make_unique<CProducerThreadWrapper>(nProducers);
+
+
+    }
+
     void Stop(void);
 
 private:
@@ -67,6 +83,9 @@ private:
 
     std::vector<AProducer> producers;
     std::vector<ACustomer> customers;
+
+    std::unique_ptr<CCustomerThreadWrapper> customerWrapper;
+    std::unique_ptr<CProducerThreadWrapper> producerWrapper;
 };
 
 // TODO: CWeldingCompany implementation goes here
