@@ -60,6 +60,7 @@ class CWeldingCompany
 public:
     static void SeqSolve(APriceList priceList, COrder& order);
 
+    //dodavatel
     void AddProducer(AProducer prod)
     {
         producers.emplace_back(prod);
@@ -79,7 +80,7 @@ public:
         nProdThreads = thrCount;
 
         for(uint c = 0; c < nCustomers; c++)
-            customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, std::ref(customers[c])));
+            customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, std::ref(customers.at(c))));
 
         for(uint p = 0; p < nProdThreads; p++)
             producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
@@ -92,7 +93,7 @@ private:
     void handleDemands(const ACustomer& customer)
     {
         AOrderList orderList;
-        std::unique_lock<std::mutex> lockC(mutexC);
+        std::unique_lock<std::mutex> lockC(mtx);
 
         while((orderList = customer.get()->WaitForDemand()) != nullptr)
         {
@@ -104,20 +105,41 @@ private:
             buffer.push(std::make_pair(customer, orderList));
             cvEmpty.notify_one();
         }
+
+        finishedCustomers++;
     }
 
-    //thread serving for producers
+    //working thread
     void evaluateOrders()
     {
+        std::pair<ACustomer, AOrderList> order;
+        std::unique_lock<std::mutex> lockP(mtx);
 
+        while(!(buffer.empty() && finishedCustomers == nCustomers))
+        {
+            cvEmpty.wait(lockP, [this] ()
+            {
+                return !buffer.empty();
+            });
+
+            order = buffer.front();
+            buffer.pop();
+
+            lockP.unlock();
+            auto materialID = order.second.get()->m_MaterialID;
+            lockP.lock();
+
+            for(const auto& producer : producers)
+                producer.get()->SendPriceList(materialID);
+        }
     }
 
     unsigned int nProducers = 0;
     unsigned int nCustomers = 0;
+    unsigned int finishedCustomers = 0;
     unsigned int nProdThreads;
 
     std::vector<AProducer> producers;
-    //useless
     std::vector<ACustomer> customers;
 
     std::vector<std::thread> customerThreads;
@@ -126,8 +148,7 @@ private:
     std::queue<std::pair<ACustomer, AOrderList>> buffer;
 
     //thread stuff here
-    std::mutex mutexC;
-    std::mutex mutexP;
+    std::mutex mtx;
 
     std::condition_variable cvFull;
     std::condition_variable cvEmpty;
