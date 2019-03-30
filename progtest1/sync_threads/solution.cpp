@@ -117,27 +117,39 @@ private:
 
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
-            cvEmpty.wait(lockP, [this] ()
-            {
-                return !buffer.empty();
-            });
-
-            order = buffer.front();
-            buffer.pop();
-
             lockP.unlock();
+
+            order = popBuffer();
             auto materialID = order.second.get()->m_MaterialID;
+
             lockP.lock();
 
             for(const auto& producer : producers)
                 producer.get()->SendPriceList(materialID);
+
+            cvFull.notify_one();
         }
+    }
+
+    std::pair<ACustomer, AOrderList> popBuffer()
+    {
+        std::unique_lock<std::mutex> lockP(mtx);
+        cvEmpty.wait(lockP, [this] ()
+        {
+            return !buffer.empty();
+        });
+
+        auto order = buffer.front();
+        buffer.pop();
+        lockP.unlock();
+
+        return order;
     }
 
     unsigned int nProducers = 0;
     unsigned int nCustomers = 0;
     unsigned int finishedCustomers = 0;
-    unsigned int nProdThreads;
+    unsigned int nProdThreads{};
 
     std::vector<AProducer> producers;
     std::vector<ACustomer> customers;
@@ -149,7 +161,6 @@ private:
 
     //thread stuff here
     std::mutex mtx;
-
     std::condition_variable cvFull;
     std::condition_variable cvEmpty;
 };
