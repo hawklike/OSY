@@ -60,7 +60,6 @@ class CWeldingCompany
 public:
     static void SeqSolve(APriceList priceList, COrder& order);
 
-    //dodavatel
     void AddProducer(AProducer prod)
     {
         producers.emplace_back(prod);
@@ -76,12 +75,25 @@ public:
     void AddPriceList(AProducer prod, APriceList priceList)
     {
         unsigned int materialID = priceList.get()->m_MaterialID;
-        std::unique_lock<std::mutex> lock(mtxMapPriceLists);
-        auto& producers = dbsPriceLists.at(materialID).first;
-        auto& priceLists = dbsPriceLists.at(materialID).second;
-        producers.insert(prod);
-        priceLists.insert(priceList);
-        dbsPriceLists.insert(std::make_pair(priceList.get()->m_MaterialID, std::make_pair(producers, priceLists)));
+        std::unique_lock<std::mutex> lockerMap(mtxMapPriceLists);
+        if(dbsPriceLists.count(materialID))
+        {
+            dbsPriceLists.at(materialID).first.insert(prod);
+            dbsPriceLists.at(materialID).second.insert(priceList);
+        }
+        else
+        {
+            lockerMap.unlock();
+
+            std::set<AProducer> producers;
+            std::set<APriceList> priceLists;
+            producers.insert(prod);
+            priceLists.insert(priceList);
+
+            lockerMap.lock();
+
+            dbsPriceLists[materialID] = std::make_pair(producers, priceLists);
+        }
     }
 
     void Start(unsigned thrCount)
