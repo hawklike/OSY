@@ -73,7 +73,16 @@ public:
         nCustomers++;
     }
 
-    void AddPriceList(AProducer prod, APriceList priceList);
+    void AddPriceList(AProducer prod, APriceList priceList)
+    {
+        unsigned int materialID = priceList.get()->m_MaterialID;
+        std::unique_lock<std::mutex> lock(mtxMapPriceLists);
+        auto& producers = dbsPriceLists.at(materialID).first;
+        auto& priceLists = dbsPriceLists.at(materialID).second;
+        producers.insert(prod);
+        priceLists.insert(priceList);
+        dbsPriceLists.insert(std::make_pair(priceList.get()->m_MaterialID, std::make_pair(producers, priceLists)));
+    }
 
     void Start(unsigned thrCount)
     {
@@ -93,7 +102,7 @@ private:
     void handleDemands(const ACustomer& customer)
     {
         AOrderList orderList;
-        std::unique_lock<std::mutex> lockC(mtx);
+        std::unique_lock<std::mutex> lockC(mtxBuffer);
 
         while((orderList = customer.get()->WaitForDemand()) != nullptr)
         {
@@ -113,7 +122,7 @@ private:
     void evaluateOrders()
     {
         std::pair<ACustomer, AOrderList> order;
-        std::unique_lock<std::mutex> lockP(mtx);
+        std::unique_lock<std::mutex> lockP(mtxBuffer);
 
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
@@ -128,12 +137,16 @@ private:
                 producer.get()->SendPriceList(materialID);
 
             cvFull.notify_one();
+
+            //pokud jsou oceneny vsechny objednavky z orderListu
+//            order.first.get()->Completed();
         }
     }
 
+    //popping out an order from a buffer
     std::pair<ACustomer, AOrderList> popBuffer()
     {
-        std::unique_lock<std::mutex> lockP(mtx);
+        std::unique_lock<std::mutex> lockP(mtxBuffer);
         cvEmpty.wait(lockP, [this] ()
         {
             return !buffer.empty();
@@ -158,14 +171,15 @@ private:
     std::vector<std::thread> producerThreads;
 
     std::queue<std::pair<ACustomer, AOrderList>> buffer;
+    using mapPriceLists = std::map<uint, std::pair<std::set<AProducer>, std::set<APriceList>>>;
+    mapPriceLists dbsPriceLists;
 
     //thread stuff here
-    std::mutex mtx;
+    std::mutex mtxBuffer;
+    std::mutex mtxMapPriceLists;
     std::condition_variable cvFull;
     std::condition_variable cvEmpty;
 };
-
-// TODO: CWeldingCompany implementation goes here
 
 //-------------------------------------------------------------------------------------------------
 #ifndef __PROGTEST__
