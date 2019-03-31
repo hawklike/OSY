@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -32,12 +31,11 @@
       <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-658">
-              <caret line="197" column="59" lean-forward="true" selection-start-line="197" selection-start-column="59" selection-end-line="197" selection-end-column="59" />
+            <state relative-caret-position="459">
+              <caret line="182" column="44" selection-start-line="182" selection-start-column="44" selection-end-line="182" selection-end-column="44" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
-                <element signature="e#602#621#0" />
-                <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
+                <marker date="1554059756769" expanded="false" signature="21:553" ph="..." />
               </folding>
             </state>
           </provider>
@@ -168,7 +166,7 @@
       <workItem from="1553618674751" duration="4981000" />
       <workItem from="1553683260619" duration="4697000" />
       <workItem from="1553716365759" duration="2490000" />
-      <workItem from="1553873774385" duration="46154000" />
+      <workItem from="1553873774385" duration="46842000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented addProducer/Customer">
       <created>1553874938238</created>
@@ -181,7 +179,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61084000" />
+    <option name="totallyTimeSpent" value="61772000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1922" height="1022" extended-state="6" />
@@ -236,8 +234,7 @@
           <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <element signature="e#602#621#0" />
-            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059756769" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -283,8 +280,7 @@
           <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <element signature="e#602#621#0" />
-            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059756769" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -358,8 +354,7 @@
           <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <element signature="e#602#621#0" />
-            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059756769" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -398,8 +393,7 @@
           <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <element signature="e#602#621#0" />
-            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059756769" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -438,8 +432,7 @@
           <caret line="62" column="11" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="11" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <element signature="e#602#621#0" />
-            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059756769" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -481,13 +474,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/include/c++/5/bits/stl_pair.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
@@ -495,14 +481,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/common.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-658">
-          <caret line="197" column="59" lean-forward="true" selection-start-line="197" selection-start-column="59" selection-end-line="197" selection-end-column="59" />
+        <state relative-caret-position="459">
+          <caret line="182" column="44" selection-start-line="182" selection-start-column="44" selection-end-line="182" selection-end-column="44" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <element signature="e#602#621#0" />
-            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059756769" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>

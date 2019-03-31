@@ -29,32 +29,6 @@
 using namespace std;
 #endif /* __PROGTEST__ */
 
-// wrapper classes
-//class CCustomerThreadWrapper
-//{
-//public:
-//    explicit CCustomerThreadWrapper(unsigned int nCustomers) : nCustomerThreads(nCustomers) {}
-//
-//    void handleDemands()
-//    {
-//      AOrderList orderList;
-//    }
-//
-//private:
-//    unsigned int nCustomerThreads;
-//    std::vector<std::thread> customerThreads;
-//};
-//
-//class CProducerThreadWrapper
-//{
-//public:
-//    explicit CProducerThreadWrapper(unsigned int nProducers) : nProducerThreads(nProducers) {}
-//private:
-//  unsigned int nProducerThreads;
-//  std::vector<std::thread> producerThreads;
-//
-//};
-
 class CWeldingCompany
 {
 public:
@@ -74,6 +48,7 @@ public:
         customers.emplace_back(cust);
         nCustomers++;
     }
+
 
     /*
      * This method inserts a producer and his price list by a particular ID into a map.
@@ -118,7 +93,9 @@ public:
     void Stop(void);
 
 private:
-    //thread serving for customers
+    /*
+     * This method implements customer threads.
+     */
     void handleDemands(const ACustomer& customer)
     {
         AOrderList orderList;
@@ -138,7 +115,9 @@ private:
         finishedCustomers++;
     }
 
-    //working thread
+    /*
+     * The main thread serving for working purposes.
+     */
     void evaluateOrders()
     {
         std::pair<ACustomer, AOrderList> orderList;
@@ -147,14 +126,17 @@ private:
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
             lockP.unlock();
-            orderList = popBuffer();
+
+            popBuffer(orderList);
             auto materialID = orderList.second.get()->m_MaterialID;
+
             lockP.lock();
 
             askProducers(materialID);
 
             APriceList tmp = std::make_shared<CPriceList>(materialID);
             createPriceList(materialID, tmp);
+
 
 
 
@@ -183,12 +165,15 @@ private:
                 producer.get()->SendPriceList(materialID);
         }
 
-        cvMapNotAllProd.wait(lockMap, [&complete] () { return complete; });
+        cvMapNotAllProd.wait(lockMap, [&complete] ()
+        {
+            return complete;
+        });
     }
 
     /*
-    * Merge all demands from all price lists by a particular material ID into a single price list.
-    */
+     * Merges all demands from all price lists by a particular material ID into a single price list.
+     */
     void createPriceList(const unsigned int& materialID, const APriceList& tmp)
     {
         std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
@@ -200,8 +185,10 @@ private:
         }
     }
 
-    //popping out an order from a buffer
-    std::pair<ACustomer, AOrderList> popBuffer()
+    /*
+     * Pops a customer's order list from a shared buffer (implemented as a queue)
+     */
+    void popBuffer(std::pair<ACustomer, AOrderList>& orderList)
     {
         std::unique_lock<std::mutex> lockP(mtxBuffer);
         cvEmpty.wait(lockP, [this] ()
@@ -209,12 +196,9 @@ private:
             return !buffer.empty();
         });
 
-        auto order = buffer.front();
+        orderList = buffer.front();
         buffer.pop();
         cvFull.notify_one();
-
-        lockP.unlock();
-        return order;
     }
 
     unsigned int nProducers = 0;
