@@ -58,7 +58,10 @@ using namespace std;
 class CWeldingCompany
 {
 public:
-    static void SeqSolve(APriceList priceList, COrder& order);
+    static void SeqSolve(APriceList priceList, COrder& order)
+    {
+        //todo delete duplicates before
+    }
 
     void AddProducer(AProducer prod)
     {
@@ -75,8 +78,8 @@ public:
     void AddPriceList(AProducer prod, APriceList priceList)
     {
         /*
-         * This method inserts into a map a producer and his price list by a particular ID.
-         * Checks if a material is found in the map.
+         * This method inserts a producer and his price list by a particular ID into a map.
+         * Checks if a material is found in a map.
          */
         unsigned int materialID = priceList.get()->m_MaterialID;
         std::unique_lock<std::mutex> lockerMap(mtxMapPriceLists);
@@ -88,16 +91,17 @@ public:
         else
         {
             lockerMap.unlock();
-
             std::set<AProducer> producers;
             std::set<APriceList> priceLists;
             producers.insert(prod);
             priceLists.insert(priceList);
-
             lockerMap.lock();
 
             dbsPriceLists[materialID] = std::make_pair(producers, priceLists);
         }
+
+        //maybe notify_all? IDK
+        cvMapNotAllProd.notify_one();
     }
 
     void Start(unsigned thrCount)
@@ -137,19 +141,19 @@ private:
     //working thread
     void evaluateOrders()
     {
-        std::pair<ACustomer, AOrderList> order;
+        std::pair<ACustomer, AOrderList> orderList;
         std::unique_lock<std::mutex> lockP(mtxBuffer);
 
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
             lockP.unlock();
-            order = popBuffer();
-            auto materialID = order.second.get()->m_MaterialID;
+            orderList = popBuffer();
+            auto materialID = orderList.second.get()->m_MaterialID;
             lockP.lock();
 
             /*
              * This section asks producers for sending their price lists,
-             * do so, if we haven't received from them all lists by material ID yet.
+             * do so, if this thread hasn't received all lists by material ID from them yet.
              * Then, the thread waits until all producers will send their price lists.
              */
             std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
@@ -165,8 +169,12 @@ private:
             cvMapNotAllProd.wait(lockMap, [&complete] () { return complete; });
             lockMap.unlock();
 
+
+
+
+
             //pokud jsou oceneny vsechny objednavky z orderListu
-//            order.first.get()->Completed();
+//            orderList.first.get()->Completed();
         }
     }
 

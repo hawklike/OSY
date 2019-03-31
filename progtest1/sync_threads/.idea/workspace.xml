@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -32,12 +31,12 @@
       <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="165" column="29" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
+            <state relative-caret-position="204">
+              <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
                 <element signature="e#602#621#0" />
-                <marker date="1554047721548" expanded="false" signature="21:553" ph="..." />
+                <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
               </folding>
             </state>
           </provider>
@@ -100,7 +99,7 @@
     <packageJsonPaths />
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="425" />
     <option name="y" value="-4" />
     <option name="width" value="964" />
@@ -168,7 +167,7 @@
       <workItem from="1553618674751" duration="4981000" />
       <workItem from="1553683260619" duration="4697000" />
       <workItem from="1553716365759" duration="2490000" />
-      <workItem from="1553873774385" duration="39046000" />
+      <workItem from="1553873774385" duration="41774000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented addProducer/Customer">
       <created>1553874938238</created>
@@ -181,7 +180,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53976000" />
+    <option name="totallyTimeSpent" value="56704000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1922" height="1022" extended-state="6" />
@@ -237,7 +236,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554047721548" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -284,7 +283,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554047721548" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -359,7 +358,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554047721548" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -399,7 +398,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554047721548" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -439,7 +438,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554047721548" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -490,12 +489,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="165" column="29" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
+        <state relative-caret-position="204">
+          <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554047721548" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
