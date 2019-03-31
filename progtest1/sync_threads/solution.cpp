@@ -74,6 +74,10 @@ public:
 
     void AddPriceList(AProducer prod, APriceList priceList)
     {
+        /*
+         * This method inserts into a map a producer and his price list by a particular ID.
+         * Checks if a material is found in the map.
+         */
         unsigned int materialID = priceList.get()->m_MaterialID;
         std::unique_lock<std::mutex> lockerMap(mtxMapPriceLists);
         if(dbsPriceLists.count(materialID))
@@ -139,16 +143,27 @@ private:
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
             lockP.unlock();
-
             order = popBuffer();
             auto materialID = order.second.get()->m_MaterialID;
-
             lockP.lock();
 
-            for(const auto& producer : producers)
-                producer.get()->SendPriceList(materialID);
+            /*
+             * This section asks producers for sending their price lists,
+             * do so, if we haven't received from them all lists by material ID yet.
+             * Then, the thread waits until all producers will send their price lists.
+             */
+            std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
+            bool contains = static_cast<bool>(dbsPriceLists.count(materialID)); // NOLINT
+            bool complete = contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
 
-            cvFull.notify_one();
+            if(!complete)
+            {
+                for(const auto& producer : producers)
+                    producer.get()->SendPriceList(materialID);
+            }
+
+            cvMapNotAllProd.wait(lockMap, [&complete] () { return complete; });
+            lockMap.unlock();
 
             //pokud jsou oceneny vsechny objednavky z orderListu
 //            order.first.get()->Completed();
@@ -166,8 +181,9 @@ private:
 
         auto order = buffer.front();
         buffer.pop();
-        lockP.unlock();
+        cvFull.notify_one();
 
+        lockP.unlock();
         return order;
     }
 
@@ -191,6 +207,7 @@ private:
     std::mutex mtxMapPriceLists;
     std::condition_variable cvFull;
     std::condition_variable cvEmpty;
+    std::condition_variable cvMapNotAllProd;
 };
 
 //-------------------------------------------------------------------------------------------------
