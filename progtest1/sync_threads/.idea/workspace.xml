@@ -12,6 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -31,12 +32,12 @@
       <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+            <state relative-caret-position="-658">
+              <caret line="197" column="59" lean-forward="true" selection-start-line="197" selection-start-column="59" selection-end-line="197" selection-end-column="59" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
                 <element signature="e#602#621#0" />
-                <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
+                <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
               </folding>
             </state>
           </provider>
@@ -45,8 +46,8 @@
       <file leaf-file-name="common.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+            <state relative-caret-position="182">
+              <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -54,7 +55,7 @@
       <file leaf-file-name="sample_tester.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample_tester.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
+            <state relative-caret-position="480">
               <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
             </state>
           </provider>
@@ -99,7 +100,7 @@
     <packageJsonPaths />
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="425" />
     <option name="y" value="-4" />
     <option name="width" value="964" />
@@ -167,7 +168,7 @@
       <workItem from="1553618674751" duration="4981000" />
       <workItem from="1553683260619" duration="4697000" />
       <workItem from="1553716365759" duration="2490000" />
-      <workItem from="1553873774385" duration="41774000" />
+      <workItem from="1553873774385" duration="46154000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented addProducer/Customer">
       <created>1553874938238</created>
@@ -180,7 +181,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56704000" />
+    <option name="totallyTimeSpent" value="61084000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1922" height="1022" extended-state="6" />
@@ -193,7 +194,7 @@
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" weight="0.32921347" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32921347" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.32921347" />
-      <window_info anchor="bottom" id="Run" order="8" weight="0.3263647" />
+      <window_info anchor="bottom" id="Run" order="8" weight="0.3258427" />
       <window_info id="Structure" order="2" sideWeight="0.50449437" side_tool="true" visible="true" weight="0.18766473" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3269663" />
       <window_info id="Favorites" order="0" weight="0.32841328" />
@@ -236,7 +237,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -283,7 +284,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -358,7 +359,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -398,7 +399,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -438,7 +439,7 @@
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -466,13 +467,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample_tester.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -480,21 +474,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sample_tester.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/common.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+        <state relative-caret-position="182">
+          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/stl_pair.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="101" column="10" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+        <state relative-caret-position="-658">
+          <caret line="197" column="59" lean-forward="true" selection-start-line="197" selection-start-column="59" selection-end-line="197" selection-end-column="59" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
             <element signature="e#602#621#0" />
-            <marker date="1554050450021" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554059059921" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>

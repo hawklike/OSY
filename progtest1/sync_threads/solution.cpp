@@ -75,12 +75,12 @@ public:
         nCustomers++;
     }
 
+    /*
+     * This method inserts a producer and his price list by a particular ID into a map.
+     * Checks if a material is found in a map.
+     */
     void AddPriceList(AProducer prod, APriceList priceList)
     {
-        /*
-         * This method inserts a producer and his price list by a particular ID into a map.
-         * Checks if a material is found in a map.
-         */
         unsigned int materialID = priceList.get()->m_MaterialID;
         std::unique_lock<std::mutex> lockerMap(mtxMapPriceLists);
         if(dbsPriceLists.count(materialID))
@@ -151,23 +151,11 @@ private:
             auto materialID = orderList.second.get()->m_MaterialID;
             lockP.lock();
 
-            /*
-             * This section asks producers for sending their price lists,
-             * do so, if this thread hasn't received all lists by material ID from them yet.
-             * Then, the thread waits until all producers will send their price lists.
-             */
-            std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
-            bool contains = static_cast<bool>(dbsPriceLists.count(materialID)); // NOLINT
-            bool complete = contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
+            askProducers(materialID);
 
-            if(!complete)
-            {
-                for(const auto& producer : producers)
-                    producer.get()->SendPriceList(materialID);
-            }
+            APriceList tmp = std::make_shared<CPriceList>(materialID);
+            createPriceList(materialID, tmp);
 
-            cvMapNotAllProd.wait(lockMap, [&complete] () { return complete; });
-            lockMap.unlock();
 
 
 
@@ -175,6 +163,40 @@ private:
 
             //pokud jsou oceneny vsechny objednavky z orderListu
 //            orderList.first.get()->Completed();
+        }
+    }
+
+    /*
+     * This section asks producers for sending their price lists,
+     * do so, if this thread hasn't received all lists by material ID from them yet.
+     * Then, a thread waits until all producers will send their price lists.
+     */
+    void askProducers(const unsigned int& materialID)
+    {
+        std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
+        bool contains = static_cast<bool>(dbsPriceLists.count(materialID)); // NOLINT
+        bool complete = contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
+
+        if(!complete)
+        {
+            for(const auto& producer : producers)
+                producer.get()->SendPriceList(materialID);
+        }
+
+        cvMapNotAllProd.wait(lockMap, [&complete] () { return complete; });
+    }
+
+    /*
+    * Merge all demands from all price lists by a particular material ID into a single price list.
+    */
+    void createPriceList(const unsigned int& materialID, const APriceList& tmp)
+    {
+        std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
+
+        for(const auto& priceList : dbsPriceLists.at(materialID).second)
+        {
+            for(const auto& item : priceList.get()->m_List)
+                tmp.get()->Add(item);
         }
     }
 
@@ -218,12 +240,30 @@ private:
     std::condition_variable cvMapNotAllProd;
 };
 
+
+//smazat
+void bar(const APriceList& tmp)
+{
+    tmp.get()->Add(CProd(12,12,30));
+    tmp.get()->Add(CProd(15,13,30));
+    tmp.get()->Add(CProd(14,12,30));
+    tmp.get()->Add(CProd(12,12,30));
+}
+
 //-------------------------------------------------------------------------------------------------
 #ifndef __PROGTEST__
 int                main                                    ( void )
 {
-  using namespace std::placeholders;
-  CWeldingCompany  test;
+    using namespace std::placeholders;
+    CWeldingCompany  test;
+
+    APriceList tmp = std::make_shared<CPriceList>(12);
+    bar(tmp);
+    std::cout << tmp.get()->m_List.size() << std::endl;
+    for(const auto& foo : tmp.get()->m_List)
+    {
+        std::cout << foo.m_W << std::endl;
+    }
 
 //  AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
 //  AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
