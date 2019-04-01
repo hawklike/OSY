@@ -34,7 +34,7 @@ class CWeldingCompany
 public:
     static void SeqSolve(APriceList priceList, COrder& order)
     {
-        //todo delete duplicates before
+        //todo call ProgtestSolver()
     }
 
     void AddProducer(AProducer prod)
@@ -137,15 +137,24 @@ private:
             APriceList tmp = std::make_shared<CPriceList>(materialID);
             createPriceList(materialID, tmp);
 
+            //todo remove duplicates from a price list (in its own function)
 
+            //todo call SeqSolve method for each order
 
-
-
-
-
-            //pokud jsou oceneny vsechny objednavky z orderListu
-//            orderList.first.get()->Completed();
+            //todo if all orders are solved, complete them
+            //orderList.first.get()->Completed();
         }
+    }
+
+    void removeDuplicates()
+    {
+
+        auto comp = [] (const std::pair<uint, uint>& a, const std::pair<uint, uint>& b)
+        {
+            return a.first == b.first ? a.second < b.second : a.first < b.first;
+        };
+
+        std::map<std::pair<uint, uint>, double, decltype(comp)> deDuplicator(comp);
     }
 
     /*
@@ -224,8 +233,49 @@ private:
     std::condition_variable cvMapNotAllProd;
 };
 
+//todo convert this prototype into a remove-duplicates function
+void prototype()
+{
+    std::vector<CProd> v;
+    v.emplace_back(12,45,13);
+    v.emplace_back(16,86,19);
+    v.emplace_back(135,56,7);
+    v.emplace_back(72,5,67);
+    v.emplace_back(7,45,23);
+    v.emplace_back(45,12,3);
+    v.emplace_back(12,60,4);
+    v.emplace_back(12,45,13);
 
-//smazat
+    using pairUint = std::pair<uint, uint>;
+    auto cmp = [] (const pairUint& a, const pairUint&b)
+    {
+        return a.first == b.first ? a.second < b.second : a.first < b.first;
+    };
+
+    std::map<std::pair<uint, uint>, double, decltype(cmp)> m(cmp);
+
+    for(const auto& it : v)
+    {
+        uint min = std::min(it.m_W, it.m_H);
+        uint max = std::max(it.m_W, it.m_H);
+        std::pair<uint, uint> size = std::make_pair(min, max);
+
+        if(m.count(size))
+        {
+            //todo solve a comparison of two doubles
+            if(m[size] > it.m_Cost) m[size] = it.m_Cost;
+            else;
+        }
+        else m[size] = it.m_Cost;
+    }
+
+    for(const auto& it : m)
+    {
+        std::cout << it.first.first << " " << it.first.second << " " << it.second << std::endl;
+    }
+}
+
+//todo delete this
 void bar(const APriceList& tmp)
 {
     tmp.get()->Add(CProd(12,12,30));
@@ -241,13 +291,18 @@ int                main                                    ( void )
     using namespace std::placeholders;
     CWeldingCompany  test;
 
-    APriceList tmp = std::make_shared<CPriceList>(12);
-    bar(tmp);
-    std::cout << tmp.get()->m_List.size() << std::endl;
-    for(const auto& foo : tmp.get()->m_List)
-    {
-        std::cout << foo.m_W << std::endl;
-    }
+    //todo delete this
+//    APriceList tmp = std::make_shared<CPriceList>(12);
+//    bar(tmp);
+//    std::cout << tmp.get()->m_List.size() << std::endl;
+//    for(const auto& foo : tmp.get()->m_List)
+//    {
+//        std::cout << foo.m_W << std::endl;
+//    }
+
+    prototype();
+
+    //todo run the code and watch with a sad face
 
 //  AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
 //  AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
