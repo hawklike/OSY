@@ -34,7 +34,9 @@ class CWeldingCompany
 public:
     static void SeqSolve(APriceList priceList, COrder& order)
     {
-        //todo call ProgtestSolver()
+        std::vector<COrder> v = {order};
+        ProgtestSolver(v, priceList);
+        order = v.front();
     }
 
     void AddProducer(AProducer prod)
@@ -48,7 +50,6 @@ public:
         customers.emplace_back(cust);
         nCustomers++;
     }
-
 
     /*
      * This method inserts a producer and his price list by a particular ID into a map.
@@ -140,9 +141,9 @@ private:
             APriceList cleanPriceList = std::make_shared<CPriceList>(materialID);
             removeDuplicates(tmpPriceList, cleanPriceList);
 
-            //todo remove duplicates from a price list (in its own function)
+            for(auto& order : orderList.second.get()->m_List)
+                SeqSolve(cleanPriceList, order);
 
-            //todo call SeqSolve method for each order
 
             //todo if all orders are solved, complete them
             //orderList.first.get()->Completed();
@@ -264,7 +265,6 @@ private:
     std::condition_variable cvMapNotAllProd;
 };
 
-//todo convert this prototype into a remove-duplicates function
 void prototype()
 {
     std::vector<CProd> v;
