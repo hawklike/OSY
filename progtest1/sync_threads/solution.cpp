@@ -91,7 +91,14 @@ public:
             producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
     }
 
-    void Stop(void);
+    void Stop()
+    {
+        for(auto& customerThr : customerThreads)
+            customerThr.join();
+
+        for(auto& producerThr : producerThreads)
+            producerThr.join();
+    }
 
 private:
     /*
@@ -144,9 +151,7 @@ private:
             for(auto& order : orderList.second.get()->m_List)
                 SeqSolve(cleanPriceList, order);
 
-
-            //todo if all orders are solved, complete them
-            //orderList.first.get()->Completed();
+            orderList.first.get()->Completed(orderList.second);
         }
     }
 
@@ -254,6 +259,7 @@ private:
     std::vector<std::thread> producerThreads;
 
     std::queue<std::pair<ACustomer, AOrderList>> buffer;
+    //<materialID, <producers, price lists>>
     using mapPriceLists = std::map<uint, std::pair<std::set<AProducer>, std::set<APriceList>>>;
     mapPriceLists dbsPriceLists;
 
@@ -265,60 +271,6 @@ private:
     std::condition_variable cvMapNotAllProd;
 };
 
-void prototype()
-{
-    std::vector<CProd> v;
-    v.emplace_back(12,45,13);
-    v.emplace_back(16,86,19);
-    v.emplace_back(45,7,7);
-    v.emplace_back(72,5,67);
-    v.emplace_back(7,45,23);
-    v.emplace_back(45,12,3);
-    v.emplace_back(12,60,4);
-    v.emplace_back(12,45,13);
-
-    using pairUint = std::pair<uint, uint>;
-    auto cmp = [] (const pairUint& a, const pairUint&b)
-    {
-        return a.first == b.first ? a.second < b.second : a.first < b.first;
-    };
-
-    std::map<std::pair<uint, uint>, double, decltype(cmp)> m(cmp);
-
-    for(const auto& it : v)
-    {
-        uint min = std::min(it.m_W, it.m_H);
-        uint max = std::max(it.m_W, it.m_H);
-        std::pair<uint, uint> size = std::make_pair(min, max);
-
-
-        if(m.count(size))
-        {
-            double epsilon = 1024 * DBL_EPSILON * (std::fabs(m[size]) + std::fabs(it.m_Cost));
-            if(m[size] - epsilon > it.m_Cost) m[size] = it.m_Cost;
-            else;
-        }
-        else m[size] = it.m_Cost;
-    }
-
-    APriceList cleanPriceList = std::make_shared<CPriceList>(12);
-
-    for(const auto& it : m)
-        cleanPriceList.get()->Add(CProd(it.first.first, it.first.second, it.second));
-
-    for(const auto &it : cleanPriceList.get()->m_List)
-        std::cout << it.m_W << " " << it.m_H << " " << it.m_Cost << std::endl;
-}
-
-//todo delete this
-void bar(const APriceList& tmp)
-{
-    tmp.get()->Add(CProd(12,12,30));
-    tmp.get()->Add(CProd(15,13,30));
-    tmp.get()->Add(CProd(14,12,30));
-    tmp.get()->Add(CProd(12,12,30));
-}
-
 //-------------------------------------------------------------------------------------------------
 #ifndef __PROGTEST__
 int                main                                    ( void )
@@ -326,26 +278,17 @@ int                main                                    ( void )
     using namespace std::placeholders;
     CWeldingCompany  test;
 
-    //todo delete this
-//    APriceList tmp = std::make_shared<CPriceList>(12);
-//    bar(tmp);
-//    std::cout << tmp.get()->m_List.size() << std::endl;
-//    for(const auto& foo : tmp.get()->m_List)
-//    {
-//        std::cout << foo.m_W << std::endl;
-//    }
-
     //todo run the code and watch with a sad face
 
-//  AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-//  AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-//  test . AddProducer ( p1 );
-//  test . AddProducer ( p2 );
-//  test . AddCustomer ( make_shared<CCustomerTest> ( 2 ) );
-//  p2 -> Start ();
-//  test . Start ( 3 );
-//  test . Stop ();
-//  p2 -> Stop ();
+  AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
+  AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
+  test . AddProducer ( p1 );
+  test . AddProducer ( p2 );
+  test . AddCustomer ( make_shared<CCustomerTest> ( 2 ) );
+  p2 -> Start ();
+  test . Start ( 3 );
+  test . Stop ();
+  p2 -> Stop ();
   return 0;
 }
 #endif /* __PROGTEST__ */
