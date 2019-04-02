@@ -108,6 +108,7 @@ private:
     {
         AOrderList orderList;
         std::unique_lock<std::mutex> lockC(mtxBuffer);
+        std::cout << "Customer thread started." << std::endl;
 
         while((orderList = customer.get()->WaitForDemand()) != nullptr)
         {
@@ -116,6 +117,7 @@ private:
                 return buffer.size() < nProdThreads;
             });
 
+            std::cout << "Customer thread: order list with material ID: " << orderList.get()->m_MaterialID << " received." << std::endl;
             buffer.push(std::make_pair(customer, orderList));
             cvEmpty.notify_one();
         }
@@ -130,6 +132,7 @@ private:
     {
         std::pair<ACustomer, AOrderList> orderList;
         std::unique_lock<std::mutex> lockP(mtxBuffer);
+        std::cout << "Working thread started." << std::endl;
 
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
@@ -137,6 +140,7 @@ private:
 
             popBuffer(orderList);
             auto materialID = orderList.second.get()->m_MaterialID;
+            std::cout << "Working thread: order list with material ID: " << materialID << " received." << std::endl;
 
             lockP.lock();
 
@@ -207,14 +211,18 @@ private:
 
         if(!complete)
         {
+            //todo fix that only one producer sends price list
             for(const auto& producer : producers)
                 producer.get()->SendPriceList(materialID);
         }
+
+        std::cout << "here" << std::endl;
 
         cvMapNotAllProd.wait(lockMap, [&complete] ()
         {
             return complete;
         });
+
     }
 
     /*
@@ -275,20 +283,20 @@ private:
 #ifndef __PROGTEST__
 int                main                                    ( void )
 {
+
     using namespace std::placeholders;
     CWeldingCompany  test;
 
-    //todo run the code and watch with a sad face
 
-  AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-  AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-  test . AddProducer ( p1 );
-  test . AddProducer ( p2 );
-  test . AddCustomer ( make_shared<CCustomerTest> ( 2 ) );
-  p2 -> Start ();
-  test . Start ( 3 );
-  test . Stop ();
-  p2 -> Stop ();
-  return 0;
+    AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
+    AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
+    test . AddProducer ( p1 );
+    test . AddProducer ( p2 );
+    test . AddCustomer ( make_shared<CCustomerTest> ( 2 ) );
+    p2 -> Start ();
+    test . Start ( 3 );
+    test . Stop ();
+    p2 -> Stop ();
+    return 0;
 }
 #endif /* __PROGTEST__ */
