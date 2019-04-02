@@ -3,6 +3,7 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="34" mnemonic="A" />
     <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="120" mnemonic="B" />
+    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="280" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
@@ -16,7 +17,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/sync_threads" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/sync_threads" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -36,11 +39,11 @@
       <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="266" column="22" selection-start-line="266" selection-start-column="22" selection-end-line="266" selection-end-column="22" />
+            <state relative-caret-position="381">
+              <caret line="168" column="8" lean-forward="true" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
-                <marker date="1554151031974" expanded="false" signature="21:553" ph="..." />
+                <marker date="1554212827865" expanded="false" signature="21:553" ph="..." />
               </folding>
             </state>
           </provider>
@@ -172,7 +175,7 @@
       <workItem from="1553618674751" duration="4981000" />
       <workItem from="1553683260619" duration="4697000" />
       <workItem from="1553716365759" duration="2490000" />
-      <workItem from="1553873774385" duration="56233000" />
+      <workItem from="1553873774385" duration="61662000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented addProducer/Customer">
       <created>1553874938238</created>
@@ -185,7 +188,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71163000" />
+    <option name="totallyTimeSpent" value="76592000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -200,14 +203,14 @@
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49325842" weight="0.18766473" />
-      <window_info id="TODO" order="3" sideWeight="0.43166667" visible="true" weight="0.2836057" />
+      <window_info id="TODO" order="3" sideWeight="0.43146068" visible="true" weight="0.2836057" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3269663" />
       <window_info anchor="bottom" id="CMake" order="5" weight="0.32847533" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" weight="0.32921347" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32921347" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.32921347" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.3258427" />
-      <window_info id="Structure" order="2" sideWeight="0.5683333" side_tool="true" visible="true" weight="0.2836057" />
+      <window_info anchor="bottom" id="Run" order="8" weight="0.3258427" />
+      <window_info id="Structure" order="2" sideWeight="0.5685393" side_tool="true" visible="true" weight="0.2836057" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3269663" />
       <window_info id="Favorites" order="0" weight="0.32841328" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
@@ -231,7 +234,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="20" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -248,7 +251,7 @@
           <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554151031974" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554212827865" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -294,7 +297,7 @@
           <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554151031974" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554212827865" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -368,7 +371,7 @@
           <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554151031974" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554212827865" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -407,7 +410,7 @@
           <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554151031974" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554212827865" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -446,7 +449,7 @@
           <caret line="62" column="11" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="11" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554151031974" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554212827865" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -504,11 +507,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="266" column="22" selection-start-line="266" selection-start-column="22" selection-end-line="266" selection-end-column="22" />
+        <state relative-caret-position="381">
+          <caret line="168" column="8" lean-forward="true" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554151031974" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554212827865" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>

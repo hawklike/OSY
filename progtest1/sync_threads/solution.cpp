@@ -134,8 +134,11 @@ private:
 
             askProducers(materialID);
 
-            APriceList tmp = std::make_shared<CPriceList>(materialID);
-            createPriceList(materialID, tmp);
+            APriceList tmpPriceList = std::make_shared<CPriceList>(materialID);
+            createPriceList(materialID, tmpPriceList);
+            
+            APriceList cleanPriceList = std::make_shared<CPriceList>(materialID);
+            removeDuplicates(tmpPriceList, cleanPriceList);
 
             //todo remove duplicates from a price list (in its own function)
 
@@ -146,15 +149,43 @@ private:
         }
     }
 
-    void removeDuplicates()
+    /*
+     * Removes duplicates from a given price list. The way of doing that is inserting
+     * each producer's item into a map, sorted by width and height in an ascending order.
+     * If an item with the same size as an item being currently inserted
+     * exists in the map, then prices are compared. If a price of a newly inserted item is
+     * lower, then the original item is replaced. Returns a price list without duplicates.
+     * Lower prices are preferred.
+     */
+    void removeDuplicates(const APriceList& priceList, APriceList& cleanPriceList)
     {
-
-        auto comp = [] (const std::pair<uint, uint>& a, const std::pair<uint, uint>& b)
+        using pairUint = std::pair<uint, uint>;
+        auto cmp = [] (const pairUint& a, const pairUint&b)
         {
             return a.first == b.first ? a.second < b.second : a.first < b.first;
         };
 
-        std::map<std::pair<uint, uint>, double, decltype(comp)> deDuplicator(comp);
+        //<<width, height>, price>
+        std::map<std::pair<uint, uint>, double, decltype(cmp)> m(cmp);
+
+        for(const auto& item : priceList.get()->m_List)
+        {
+            uint min = std::min(item.m_W, item.m_H);
+            uint max = std::max(item.m_W, item.m_H);
+            std::pair<uint, uint> size = std::make_pair(min, max);
+
+            if(m.count(size))
+            {
+                //double comparison
+                double epsilon = 1024 * DBL_EPSILON * (std::fabs(m[size]) + std::fabs(item.m_Cost));
+                if(m[size] - epsilon > item.m_Cost) m[size] = item.m_Cost;
+                else;
+            }
+            else m[size] = item.m_Cost;
+        }
+
+        for(const auto& it : m)
+            cleanPriceList.get()->Add(CProd(it.first.first, it.first.second, it.second));
     }
 
     /*
@@ -239,7 +270,7 @@ void prototype()
     std::vector<CProd> v;
     v.emplace_back(12,45,13);
     v.emplace_back(16,86,19);
-    v.emplace_back(135,56,7);
+    v.emplace_back(45,7,7);
     v.emplace_back(72,5,67);
     v.emplace_back(7,45,23);
     v.emplace_back(45,12,3);
@@ -260,19 +291,23 @@ void prototype()
         uint max = std::max(it.m_W, it.m_H);
         std::pair<uint, uint> size = std::make_pair(min, max);
 
+
         if(m.count(size))
         {
-            //todo solve a comparison of two doubles
-            if(m[size] > it.m_Cost) m[size] = it.m_Cost;
+            double epsilon = 1024 * DBL_EPSILON * (std::fabs(m[size]) + std::fabs(it.m_Cost));
+            if(m[size] - epsilon > it.m_Cost) m[size] = it.m_Cost;
             else;
         }
         else m[size] = it.m_Cost;
     }
 
+    APriceList cleanPriceList = std::make_shared<CPriceList>(12);
+
     for(const auto& it : m)
-    {
-        std::cout << it.first.first << " " << it.first.second << " " << it.second << std::endl;
-    }
+        cleanPriceList.get()->Add(CProd(it.first.first, it.first.second, it.second));
+
+    for(const auto &it : cleanPriceList.get()->m_List)
+        std::cout << it.m_W << " " << it.m_H << " " << it.m_Cost << std::endl;
 }
 
 //todo delete this
@@ -299,8 +334,6 @@ int                main                                    ( void )
 //    {
 //        std::cout << foo.m_W << std::endl;
 //    }
-
-    prototype();
 
     //todo run the code and watch with a sad face
 
