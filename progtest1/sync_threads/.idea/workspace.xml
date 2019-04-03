@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="154" mnemonic="B" />
     <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="34" mnemonic="A" />
+    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="155" mnemonic="B" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
@@ -16,6 +16,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/sync_threads" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/sync_threads" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -35,11 +38,11 @@
       <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="721">
-              <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+            <state relative-caret-position="-802">
+              <caret line="155" column="12" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="12" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
-                <marker date="1554223113392" expanded="false" signature="21:553" ph="..." />
+                <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
               </folding>
             </state>
           </provider>
@@ -48,7 +51,7 @@
       <file leaf-file-name="common.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="1802">
               <caret line="106" column="59" selection-start-line="106" selection-start-column="59" selection-end-line="106" selection-end-column="59" />
             </state>
           </provider>
@@ -59,24 +62,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sample_tester.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sample_tester.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sample_tester.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="41" column="35" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -165,6 +150,9 @@
       <item itemvalue="Application.sync_threads" />
     </list>
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -180,7 +168,8 @@
       <workItem from="1553618674751" duration="4981000" />
       <workItem from="1553683260619" duration="4697000" />
       <workItem from="1553716365759" duration="2490000" />
-      <workItem from="1553873774385" duration="68104000" />
+      <workItem from="1553873774385" duration="71891000" />
+      <workItem from="1554314080603" duration="752000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented addProducer/Customer">
       <created>1553874938238</created>
@@ -193,7 +182,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83034000" />
+    <option name="totallyTimeSpent" value="87573000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -204,21 +193,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-4" width="1922" height="1022" extended-state="6" />
+    <frame x="-1" y="-11" width="1922" height="1029" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49325842" weight="0.18766473" />
-      <window_info id="TODO" order="3" sideWeight="0.43146068" visible="true" weight="0.2836057" />
+      <window_info id="TODO" order="3" sideWeight="0.42883894" visible="true" weight="0.2836057" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3269663" />
       <window_info anchor="bottom" id="CMake" order="5" weight="0.32847533" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" weight="0.32921347" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32921347" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.32921347" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.3258427" />
-      <window_info id="Structure" order="2" sideWeight="0.5685393" side_tool="true" visible="true" weight="0.2836057" />
+      <window_info id="Structure" order="2" sideWeight="0.57116103" side_tool="true" visible="true" weight="0.2836057" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.3269663" />
-      <window_info id="Favorites" order="0" weight="0.32841328" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info id="Favorites" order="0" side_tool="true" weight="0.32841328" />
+      <window_info active="true" anchor="bottom" id="Debug" order="7" visible="true" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -230,6 +219,16 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -239,10 +238,56 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="21" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/solution.cpp</url>
+          <line>215</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="30" />
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="dbsPriceLists" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>producers</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/solution.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3757">
+          <caret line="221" selection-start-line="221" selection-end-line="221" />
+          <folding>
+            <element signature="e#21#38#0" expanded="true" />
+            <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1802">
+          <caret line="106" column="59" selection-start-line="106" selection-start-column="59" selection-end-line="106" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/progtest_solver.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -256,7 +301,7 @@
           <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554223113392" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -302,7 +347,7 @@
           <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554223113392" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -376,7 +421,7 @@
           <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554223113392" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -415,7 +460,7 @@
           <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554223113392" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -454,7 +499,7 @@
           <caret line="62" column="11" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="11" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554223113392" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>
@@ -468,13 +513,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sample_tester.h.gch" />
-    <entry file="file:///usr/include/c++/5/bits/shared_ptr.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="556" column="10" selection-start-line="556" selection-start-column="10" selection-end-line="556" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sample_tester.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -489,6 +527,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/common.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1802">
+          <caret line="106" column="59" selection-start-line="106" selection-start-column="59" selection-end-line="106" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/allocator.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/ext/new_allocator.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/move.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/stl_vector.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="547" selection-start-line="547" selection-end-line="547" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/shared_ptr.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="636" selection-start-line="636" selection-end-line="636" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/progtest_solver.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -496,27 +583,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample_tester.cpp">
+    <entry file="file:///usr/include/c++/5/bits/shared_ptr_base.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="41" column="35" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="106" column="59" selection-start-line="106" selection-start-column="59" selection-end-line="106" selection-end-column="59" />
+        <state relative-caret-position="211">
+          <caret line="1059" selection-start-line="1059" selection-end-line="1059" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+        <state relative-caret-position="-802">
+          <caret line="155" column="12" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="12" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554223113392" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554314609077" expanded="false" signature="21:553" ph="..." />
           </folding>
         </state>
       </provider>

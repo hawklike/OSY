@@ -58,6 +58,7 @@ public:
     void AddPriceList(AProducer prod, APriceList priceList)
     {
         unsigned int materialID = priceList.get()->m_MaterialID;
+
         std::unique_lock<std::mutex> lockerMap(mtxMapPriceLists);
         if(dbsPriceLists.count(materialID))
         {
@@ -148,7 +149,7 @@ private:
 
             APriceList tmpPriceList = std::make_shared<CPriceList>(materialID);
             createPriceList(materialID, tmpPriceList);
-            
+
             APriceList cleanPriceList = std::make_shared<CPriceList>(materialID);
             removeDuplicates(tmpPriceList, cleanPriceList);
 
@@ -199,30 +200,28 @@ private:
     }
 
     /*
-     * This section asks producers for sending their price lists,
-     * do so, if this thread hasn't received all lists by material ID from them yet.
+     * This method asks producers for sending their price lists.
      * Then, a thread waits until all producers will send their price lists.
      */
     void askProducers(const unsigned int& materialID)
     {
-        std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
         bool contains = static_cast<bool>(dbsPriceLists.count(materialID)); // NOLINT
         bool complete = contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
 
         if(!complete)
         {
-            //todo fix that only one producer sends price list
             for(const auto& producer : producers)
                 producer.get()->SendPriceList(materialID);
         }
 
-        std::cout << "here" << std::endl;
-
+        //todo complete is not updated, fix that
+        std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
         cvMapNotAllProd.wait(lockMap, [&complete] ()
         {
             return complete;
         });
 
+        //todo fix unreachable part here (depends on the todo above?)
     }
 
     /*
@@ -286,7 +285,6 @@ int                main                                    ( void )
 
     using namespace std::placeholders;
     CWeldingCompany  test;
-
 
     AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
     AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
