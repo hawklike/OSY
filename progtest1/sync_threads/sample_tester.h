@@ -48,6 +48,7 @@ class CCustomerTest : public CCustomer
   private:
     static std::vector<std::pair<COrder, double> > c_Orders;
     unsigned                 m_Count;
+    unsigned counter = 0;
 };
 
 #endif /* __sample_tester_h__0982345234598123452345__ */

@@ -108,17 +108,15 @@ private:
     void handleDemands(const ACustomer& customer)
     {
         AOrderList orderList;
-        std::unique_lock<std::mutex> lockC(mtxBuffer);
-        std::cout << "Customer thread started." << std::endl;
 
         while((orderList = customer.get()->WaitForDemand()) != nullptr)
         {
+            std::unique_lock<std::mutex> lockC(mtxBuffer);
             cvFull.wait(lockC, [this] ()
             {
                 return buffer.size() < nProdThreads;
             });
 
-            std::cout << "Customer thread: order list with material ID: " << orderList.get()->m_MaterialID << " received." << std::endl;
             buffer.push(std::make_pair(customer, orderList));
             cvEmpty.notify_one();
         }
@@ -133,7 +131,6 @@ private:
     {
         std::pair<ACustomer, AOrderList> orderList;
         std::unique_lock<std::mutex> lockP(mtxBuffer);
-        std::cout << "Working thread started." << std::endl;
 
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
@@ -141,7 +138,6 @@ private:
 
             popBuffer(orderList);
             auto materialID = orderList.second.get()->m_MaterialID;
-            std::cout << "Working thread: order list with material ID: " << materialID << " received." << std::endl;
 
             lockP.lock();
 
@@ -156,7 +152,9 @@ private:
             for(auto& order : orderList.second.get()->m_List)
                 SeqSolve(cleanPriceList, order);
 
+            lockP.unlock();
             orderList.first.get()->Completed(orderList.second);
+            lockP.lock();
         }
     }
 
@@ -214,15 +212,12 @@ private:
                 producer.get()->SendPriceList(materialID);
         }
 
-        //todo complete is not updated, fix that
         std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
         cvMapNotAllProd.wait(lockMap, [this, &contains, &materialID] ()
         {
             contains = static_cast<bool>(dbsPriceLists.count(materialID));
             return contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
         });
-
-        //todo fix unreachable part here (depends on the todo above?)
     }
 
     /*
@@ -285,17 +280,59 @@ int                main                                    ( void )
 {
 
     using namespace std::placeholders;
-    CWeldingCompany  test;
 
-    AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-    AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-    test . AddProducer ( p1 );
-    test . AddProducer ( p2 );
-    test . AddCustomer ( make_shared<CCustomerTest> ( 2 ) );
-    p2 -> Start ();
-    test . Start ( 3 );
-    test . Stop ();
-    p2 -> Stop ();
+    CWeldingCompany test;
+
+    int numberOfThreads=24;
+
+    //sscanf(arg[1],"%d",&numberOfThreads);
+    AProducer array1[600];
+
+    AProducerAsync array2[600];
+
+    //array1[0] = make_shared<CProducerSync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
+
+    //array2[0] = make_shared<CProducerAsync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
+
+    //test.AddProducer(array1[0]);
+
+    //test.AddProducer(array2[0]);
+
+    //array2[0]->Start();
+
+
+    for(int i=0;i<600;i++)
+
+    {
+
+        array1[i] = make_shared<CProducerSync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
+
+        array2[i] = make_shared<CProducerAsync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
+
+        test.AddProducer(array1[i]);
+
+        test.AddProducer(array2[i]);
+
+        array2[i]->Start();
+
+    }
+
+
+    test.AddCustomer(make_shared<CCustomerTest>(120));
+
+    test.Start(numberOfThreads);
+
+    test.Stop();
+
+
+    //array2[0]->Stop();
+
+
+    for(int i =0; i<600;i++)
+
+        array2[i]->Stop();
+
+
     return 0;
 }
 #endif /* __PROGTEST__ */

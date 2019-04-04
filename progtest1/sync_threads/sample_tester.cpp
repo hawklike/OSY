@@ -116,7 +116,8 @@ void               CCustomerTest::Completed                ( AOrderList        x
       mismatch = true;
       break;
     }
-  printf ( "CCustomerTest::Completed, status = %s\n", mismatch ? "fail" : "OK" );
+
+  printf ( "CCustomerTest::Completed %d, status = %s\n", counter++, mismatch ? "fail" : "OK" );
 }
 //-------------------------------------------------------------------------------------------------
 vector<pair<COrder, double> > CCustomerTest::c_Orders = 
