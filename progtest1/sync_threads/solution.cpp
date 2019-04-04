@@ -216,9 +216,10 @@ private:
 
         //todo complete is not updated, fix that
         std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
-        cvMapNotAllProd.wait(lockMap, [&complete] ()
+        cvMapNotAllProd.wait(lockMap, [this, &contains, &materialID] ()
         {
-            return complete;
+            contains = static_cast<bool>(dbsPriceLists.count(materialID));
+            return contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
         });
 
         //todo fix unreachable part here (depends on the todo above?)
