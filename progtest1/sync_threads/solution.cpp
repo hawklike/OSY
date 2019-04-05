@@ -130,31 +130,28 @@ private:
     void evaluateOrders()
     {
         std::pair<ACustomer, AOrderList> orderList;
-        std::unique_lock<std::mutex> lockP(mtxBuffer);
 
         while(!(buffer.empty() && finishedCustomers == nCustomers))
         {
-            lockP.unlock();
-
+            //checked
             popBuffer(orderList);
             auto materialID = orderList.second.get()->m_MaterialID;
 
-            lockP.lock();
-
+            //checked
             askProducers(materialID);
 
+            //checked
             APriceList tmpPriceList = std::make_shared<CPriceList>(materialID);
             createPriceList(materialID, tmpPriceList);
 
+            //checked
             APriceList cleanPriceList = std::make_shared<CPriceList>(materialID);
             removeDuplicates(tmpPriceList, cleanPriceList);
 
             for(auto& order : orderList.second.get()->m_List)
                 SeqSolve(cleanPriceList, order);
 
-            lockP.unlock();
             orderList.first.get()->Completed(orderList.second);
-            lockP.lock();
         }
     }
 
@@ -225,8 +222,6 @@ private:
      */
     void createPriceList(const unsigned int& materialID, const APriceList& tmp)
     {
-        std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
-
         for(const auto& priceList : dbsPriceLists.at(materialID).second)
         {
             for(const auto& item : priceList.get()->m_List)
@@ -276,62 +271,55 @@ private:
 
 //-------------------------------------------------------------------------------------------------
 #ifndef __PROGTEST__
-int                main                                    ( void )
+//int                main                                    ( void )
+//{
+//
+//    //todo fix deadlock for multiple working threads
+//    using namespace std::placeholders;
+//    CWeldingCompany  test;
+//
+//    AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
+////    AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
+//    test . AddProducer ( p1 );
+////    test . AddProducer ( p2 );
+//    test . AddCustomer ( make_shared<CCustomerTest> ( 9 ) );
+////    p2 -> Start ();
+//    test . Start ( 100 );
+//    test . Stop ();
+////    p2 -> Stop ();
+//    return 0;
+//}
+
+
+int main()
 {
-
     using namespace std::placeholders;
-
     CWeldingCompany test;
 
-    int numberOfThreads=24;
+    int nThreads = 24;
+    int nProducers = 1;
+    int nCustomers = 1;
 
-    //sscanf(arg[1],"%d",&numberOfThreads);
-    AProducer array1[600];
+    AProducer producerSync[nProducers];
+    AProducerAsync producerAsync[nProducers];
 
-    AProducerAsync array2[600];
-
-    //array1[0] = make_shared<CProducerSync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
-
-    //array2[0] = make_shared<CProducerAsync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
-
-    //test.AddProducer(array1[0]);
-
-    //test.AddProducer(array2[0]);
-
-    //array2[0]->Start();
-
-
-    for(int i=0;i<600;i++)
-
+    for(int i = 0; i < nProducers; i++)
     {
-
-        array1[i] = make_shared<CProducerSync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
-
-        array2[i] = make_shared<CProducerAsync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
-
-        test.AddProducer(array1[i]);
-
-        test.AddProducer(array2[i]);
-
-        array2[i]->Start();
-
+        producerSync[i] = make_shared<CProducerSync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
+        producerAsync[i] = make_shared<CProducerAsync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
+        test.AddProducer(producerSync[i]);
+        test.AddProducer(producerAsync[i]);
+        producerAsync[i]->Start();
     }
 
+    for(int i = 0; i < nCustomers; i++)
+        test.AddCustomer(make_shared<CCustomerTest>(120));
 
-    test.AddCustomer(make_shared<CCustomerTest>(120));
-
-    test.Start(numberOfThreads);
-
+    test.Start(nThreads);
     test.Stop();
 
-
-    //array2[0]->Stop();
-
-
-    for(int i =0; i<600;i++)
-
-        array2[i]->Stop();
-
+    for(int i = 0; i < nThreads; i++)
+        producerAsync[i]->Stop();
 
     return 0;
 }
