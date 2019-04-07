@@ -59,7 +59,7 @@ public:
     {
         unsigned int materialID = priceList.get()->m_MaterialID;
 
-        std::unique_lock<std::mutex> lockerMap(mtxMapPriceLists);
+        std::unique_lock<std::mutex> lockDbsPriceLists(mtxDbsPriceLists);
         if(dbsPriceLists.count(materialID))
         {
             dbsPriceLists.at(materialID).first.insert(prod);
@@ -67,13 +67,14 @@ public:
         }
         else
         {
-            lockerMap.unlock();
+            lockDbsPriceLists.unlock();
+
             std::set<AProducer> producers;
             std::set<APriceList> priceLists;
             producers.insert(prod);
             priceLists.insert(priceList);
-            lockerMap.lock();
 
+            lockDbsPriceLists.lock();
             dbsPriceLists[materialID] = std::make_pair(producers, priceLists);
         }
 
@@ -83,21 +84,22 @@ public:
 
     void Start(unsigned thrCount)
     {
-        nProdThreads = thrCount;
+        nWorkingThreads = thrCount;
 
         for(uint c = 0; c < nCustomers; c++)
             customerThreads.emplace_back(std::thread(&CWeldingCompany::handleDemands, this, std::ref(customers.at(c))));
 
-        for(uint p = 0; p < nProdThreads; p++)
-            producerThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
+        for(uint p = 0; p < nWorkingThreads; p++)
+            workingThreads.emplace_back(std::thread(&CWeldingCompany::evaluateOrders, this));
     }
 
     void Stop()
     {
+
         for(auto& customerThr : customerThreads)
             customerThr.join();
 
-        for(auto& producerThr : producerThreads)
+        for(auto& producerThr : workingThreads)
             producerThr.join();
     }
 
@@ -111,16 +113,18 @@ private:
 
         while((orderList = customer.get()->WaitForDemand()) != nullptr)
         {
-            std::unique_lock<std::mutex> lockC(mtxBuffer);
-            cvFull.wait(lockC, [this] ()
+            std::unique_lock<std::mutex> lockBuffer(mtxBuffer);
+            cvFull.wait(lockBuffer, [this] ()
             {
-                return buffer.size() < nProdThreads;
+                //todo if not working, maybe change to a constant, such as 1000?
+                return buffer.size() < nWorkingThreads;
             });
 
             buffer.push(std::make_pair(customer, orderList));
             cvEmpty.notify_one();
         }
 
+        std::unique_lock<std::mutex> lockCustomers(mtxBuffer);
         finishedCustomers++;
     }
 
@@ -129,30 +133,32 @@ private:
      */
     void evaluateOrders()
     {
-        std::pair<ACustomer, AOrderList> orderList;
-
-        while(!(buffer.empty() && finishedCustomers == nCustomers))
+        std::unique_lock<std::mutex> lockBuffer(mtxBuffer);
+        while(!(finishedCustomers == nCustomers && buffer.empty()))
         {
-            //checked
-            popBuffer(orderList);
+            lockBuffer.unlock();
+
+            std::pair<ACustomer, AOrderList> orderList;
+
+            popBuffer(orderList); //checked
             auto materialID = orderList.second.get()->m_MaterialID;
 
-            //checked
-            askProducers(materialID);
+            askProducers(materialID); //checked
 
-            //checked
             APriceList tmpPriceList = std::make_shared<CPriceList>(materialID);
-            createPriceList(materialID, tmpPriceList);
+            createPriceList(materialID, tmpPriceList); //checked
 
-            //checked
             APriceList cleanPriceList = std::make_shared<CPriceList>(materialID);
-            removeDuplicates(tmpPriceList, cleanPriceList);
+            removeDuplicates(tmpPriceList, cleanPriceList); //checked
 
             for(auto& order : orderList.second.get()->m_List)
                 SeqSolve(cleanPriceList, order);
 
             orderList.first.get()->Completed(orderList.second);
+            lockBuffer.lock();
         }
+
+//        finishedWorkingThreads++;
     }
 
     /*
@@ -200,8 +206,9 @@ private:
      */
     void askProducers(const unsigned int& materialID)
     {
-        bool contains = static_cast<bool>(dbsPriceLists.count(materialID)); // NOLINT
-        bool complete = contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
+        std::unique_lock<std::mutex> lockDbsPriceLists(mtxDbsPriceLists);
+        bool complete = dbsPriceLists.count(materialID) ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
+        lockDbsPriceLists.unlock();
 
         if(!complete)
         {
@@ -209,11 +216,10 @@ private:
                 producer.get()->SendPriceList(materialID);
         }
 
-        std::unique_lock<std::mutex> lockMap(mtxMapPriceLists);
-        cvMapNotAllProd.wait(lockMap, [this, &contains, &materialID] ()
+        lockDbsPriceLists.lock();
+        cvMapNotAllProd.wait(lockDbsPriceLists, [this, &materialID] ()
         {
-            contains = static_cast<bool>(dbsPriceLists.count(materialID));
-            return contains ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
+            return dbsPriceLists.count(materialID) ? dbsPriceLists.at(materialID).first.size() == nProducers : false;
         });
     }
 
@@ -222,7 +228,12 @@ private:
      */
     void createPriceList(const unsigned int& materialID, const APriceList& tmp)
     {
-        for(const auto& priceList : dbsPriceLists.at(materialID).second)
+        //todo maybe this lock is not necessary
+        std::unique_lock<std::mutex> lockDbsPriceLists(mtxDbsPriceLists);
+        const std::set<APriceList>& priceLists = dbsPriceLists.at(materialID).second;
+        lockDbsPriceLists.unlock();
+
+        for(const auto& priceList : priceLists)
         {
             for(const auto& item : priceList.get()->m_List)
                 tmp.get()->Add(item);
@@ -248,22 +259,23 @@ private:
     unsigned int nProducers = 0;
     unsigned int nCustomers = 0;
     unsigned int finishedCustomers = 0;
-    unsigned int nProdThreads{};
+    unsigned int finishedWorkingThreads = 0;
+    unsigned int nWorkingThreads = 0;
 
     std::vector<AProducer> producers;
     std::vector<ACustomer> customers;
 
     std::vector<std::thread> customerThreads;
-    std::vector<std::thread> producerThreads;
+    std::vector<std::thread> workingThreads;
 
     std::queue<std::pair<ACustomer, AOrderList>> buffer;
     //<materialID, <producers, price lists>>
     using mapPriceLists = std::map<uint, std::pair<std::set<AProducer>, std::set<APriceList>>>;
     mapPriceLists dbsPriceLists;
 
-    //thread stuff here
     std::mutex mtxBuffer;
-    std::mutex mtxMapPriceLists;
+    std::mutex mtxDbsPriceLists;
+
     std::condition_variable cvFull;
     std::condition_variable cvEmpty;
     std::condition_variable cvMapNotAllProd;
@@ -274,7 +286,6 @@ private:
 //int                main                                    ( void )
 //{
 //
-//    //todo fix deadlock for multiple working threads
 //    using namespace std::placeholders;
 //    CWeldingCompany  test;
 //
@@ -296,14 +307,15 @@ int main()
     using namespace std::placeholders;
     CWeldingCompany test;
 
-    int nThreads = 24;
-    int nProducers = 1;
-    int nCustomers = 1;
+    //todo fix a deadlock which this test produces
+    const unsigned nThreads = 5;
+    const unsigned nProducers = 1;
+    const unsigned nCustomers = 1;
 
     AProducer producerSync[nProducers];
     AProducerAsync producerAsync[nProducers];
 
-    for(int i = 0; i < nProducers; i++)
+    for(unsigned i = 0; i < nProducers; i++)
     {
         producerSync[i] = make_shared<CProducerSync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
         producerAsync[i] = make_shared<CProducerAsync>(bind(&CWeldingCompany::AddPriceList, &test, _1, _2));
@@ -312,13 +324,13 @@ int main()
         producerAsync[i]->Start();
     }
 
-    for(int i = 0; i < nCustomers; i++)
-        test.AddCustomer(make_shared<CCustomerTest>(120));
+    for(unsigned i = 0; i < nCustomers; i++)
+        test.AddCustomer(make_shared<CCustomerTest>(2));
 
     test.Start(nThreads);
     test.Stop();
 
-    for(int i = 0; i < nThreads; i++)
+    for(unsigned i = 0; i < nThreads; i++)
         producerAsync[i]->Stop();
 
     return 0;
