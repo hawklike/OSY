@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="153" mnemonic="B" />
-    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="101" mnemonic="A" />
-    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="313" mnemonic="C" />
+    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="167" mnemonic="B" />
+    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="105" mnemonic="A" />
+    <bookmark url="file://$PROJECT_DIR$/solution.cpp" line="328" mnemonic="C" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
@@ -17,12 +17,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa720aab-670e-422b-9025-a339e03e6de4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/sample_tester.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/sample_tester.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/sync_threads.dir/solution.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/sync_threads" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/sync_threads" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample_tester.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/sample_tester.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample_tester.h" beforeDir="false" afterPath="$PROJECT_DIR$/sample_tester.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/solution.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/solution.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -42,11 +36,11 @@
       <file leaf-file-name="solution.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solution.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="248" column="43" selection-start-line="248" selection-start-column="43" selection-end-line="248" selection-end-column="43" />
+            <state relative-caret-position="328">
+              <caret line="313" column="39" lean-forward="true" selection-start-line="313" selection-start-column="39" selection-end-line="313" selection-end-column="39" />
               <folding>
                 <element signature="e#21#38#0" expanded="true" />
-                <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+                <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
               </folding>
             </state>
           </provider>
@@ -193,7 +187,7 @@
       <workItem from="1553873774385" duration="71891000" />
       <workItem from="1554314080603" duration="5469000" />
       <workItem from="1554389157009" duration="8743000" />
-      <workItem from="1554470616717" duration="41625000" />
+      <workItem from="1554470616717" duration="45043000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented addProducer/Customer">
       <created>1553874938238</created>
@@ -206,7 +200,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142658000" />
+    <option name="totallyTimeSpent" value="146076000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -265,12 +259,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/solution.cpp</url>
-          <line>105</line>
+          <line>109</line>
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/solution.cpp</url>
-          <line>315</line>
+          <line>330</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
@@ -306,7 +300,7 @@
           <caret line="221" selection-start-line="221" selection-end-line="221" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
           </folding>
         </state>
       </provider>
@@ -338,7 +332,7 @@
           <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
           </folding>
         </state>
       </provider>
@@ -384,7 +378,7 @@
           <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
           </folding>
         </state>
       </provider>
@@ -458,7 +452,7 @@
           <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
           </folding>
         </state>
       </provider>
@@ -497,7 +491,7 @@
           <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
           </folding>
         </state>
       </provider>
@@ -536,7 +530,7 @@
           <caret line="62" column="11" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="11" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
           </folding>
         </state>
       </provider>
@@ -670,11 +664,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="248" column="43" selection-start-line="248" selection-start-column="43" selection-end-line="248" selection-end-column="43" />
+        <state relative-caret-position="328">
+          <caret line="313" column="39" lean-forward="true" selection-start-line="313" selection-start-column="39" selection-end-line="313" selection-end-column="39" />
           <folding>
             <element signature="e#21#38#0" expanded="true" />
-            <marker date="1554730686727" expanded="false" signature="21:553" ph="..." />
+            <marker date="1554735056659" expanded="false" signature="21:572" ph="..." />
           </folding>
         </state>
       </provider>

@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <numeric>
+#include <utility>
 #include <vector>
 #include <set>
 #include <list>
@@ -29,10 +30,14 @@
 using namespace std;
 #endif /* __PROGTEST__ */
 
-//todo write buffer wrapper
 struct TBufferWrapper
 {
+    TBufferWrapper(ACustomer cust, AOrderList orderList, bool end)
+    : customer(std::move(cust)), orderList(std::move(orderList)), end(end) {}
 
+    ACustomer customer;
+    AOrderList orderList;
+    bool end;
 };
 
 class CWeldingCompany
@@ -84,7 +89,6 @@ public:
             dbsPriceLists[materialID] = std::make_pair(producers, priceLists);
         }
 
-        //todo think about right approach
         cvMapNotAllProd.notify_all();
     }
 
@@ -104,7 +108,6 @@ public:
         for(auto& customerThr : customerThreads)
             customerThr.join();
 
-        //todo fix deadlock which happens here
         for(auto& producerThr : workingThreads)
             producerThr.join();
     }
@@ -118,19 +121,30 @@ private:
         AOrderList orderList;
 
         while((orderList = customer.get()->WaitForDemand()) != nullptr)
+            pushBuffer(customer, orderList, false);
+
+        /*
+         * Checks if a customer is the last one.
+         */
+        std::unique_lock<std::mutex> lockCustomers(mtxFinished);
+        if(++finishedCustomers == nCustomers)
         {
-            std::unique_lock<std::mutex> lockBuffer(mtxBuffer);
-            cvFull.wait(lockBuffer, [this] ()
-            {
-                return buffer.size() < nWorkingThreads;
-            });
-
-            buffer.push(std::make_pair(customer, orderList));
-            cvEmpty.notify_one();
+            lockCustomers.unlock();
+            for(uint i = 0; i < nWorkingThreads; i++)
+                pushBuffer(nullptr, nullptr, true);
         }
+    }
 
-        std::unique_lock<std::mutex> lockCustomers(mtxBuffer);
-        finishedCustomers++;
+    void pushBuffer(const ACustomer& customer, const AOrderList& orderList, bool end)
+    {
+        std::unique_lock<std::mutex> lockBuffer(mtxBuffer);
+        cvFull.wait(lockBuffer, [this] ()
+        {
+            return buffer.size() < nWorkingThreads;
+        });
+
+        buffer.push(TBufferWrapper(customer, orderList, end));
+        cvEmpty.notify_one();
     }
 
     /*
@@ -138,28 +152,28 @@ private:
      */
     void evaluateOrders()
     {
-        //todo solve a while cycle, fix it to a correct solution (if so)
         std::unique_lock<std::mutex> lockBuffer(mtxBuffer);
         while(!(finishedCustomers == nCustomers && buffer.empty()))
         {
             lockBuffer.unlock();
-            std::pair<ACustomer, AOrderList> orderList;
+            std::tuple<ACustomer, AOrderList, bool> orderList;
 
-            popBuffer(orderList); //checked
-            auto materialID = orderList.second.get()->m_MaterialID;
+            popBuffer(orderList);
+            if(std::get<2>(orderList)) return;
+            auto materialID = std::get<1>(orderList).get()->m_MaterialID;
 
-            askProducers(materialID); //checked
+            askProducers(materialID);
 
             APriceList tmpPriceList = std::make_shared<CPriceList>(materialID);
-            createPriceList(materialID, tmpPriceList); //checked
+            createPriceList(materialID, tmpPriceList);
 
             APriceList cleanPriceList = std::make_shared<CPriceList>(materialID);
-            removeDuplicates(tmpPriceList, cleanPriceList); //checked
+            removeDuplicates(tmpPriceList, cleanPriceList);
 
-            for(auto& order : orderList.second.get()->m_List)
+            for(auto& order : std::get<1>(orderList).get()->m_List)
                 SeqSolve(cleanPriceList, order);
 
-            orderList.first.get()->Completed(orderList.second);
+            std::get<0>(orderList).get()->Completed(std::get<1>(orderList));
             lockBuffer.lock();
         }
     }
@@ -219,7 +233,6 @@ private:
                 producer.get()->SendPriceList(materialID);
         }
 
-        //todo is my wait method well implemented?
         lockDbsPriceLists.lock();
         cvMapNotAllProd.wait(lockDbsPriceLists, [this, &materialID] ()
         {
@@ -246,7 +259,7 @@ private:
     /*
      * Pops a customer's order list from a shared buffer (implemented as a queue)
      */
-    void popBuffer(std::pair<ACustomer, AOrderList>& orderList)
+    void popBuffer(std::tuple<ACustomer, AOrderList, bool>& orderList)
     {
         std::unique_lock<std::mutex> lockP(mtxBuffer);
         cvEmpty.wait(lockP, [this] ()
@@ -254,7 +267,8 @@ private:
             return !buffer.empty();
         });
 
-        orderList = buffer.front();
+        const TBufferWrapper& tmp = buffer.front();
+        orderList = std::make_tuple(tmp.customer, tmp.orderList, tmp.end);
         buffer.pop();
         cvFull.notify_one();
     }
@@ -270,7 +284,7 @@ private:
     std::vector<std::thread> customerThreads;
     std::vector<std::thread> workingThreads;
 
-    std::queue<std::pair<ACustomer, AOrderList>> buffer;
+    std::queue<TBufferWrapper> buffer;
     //<materialID, <producers, price lists>>
     using mapPriceLists = std::map<uint, std::pair<std::set<AProducer>, std::set<APriceList>>>;
     mapPriceLists dbsPriceLists;
@@ -294,7 +308,7 @@ int main()
 
     const unsigned nThreads = 10;
     const unsigned nProducers = 1;
-    const unsigned nCustomers = 1;
+    const unsigned nCustomers = 10;
 
     AProducer producerSync[nProducers];
     AProducerAsync producerAsync[nProducers];
@@ -312,7 +326,6 @@ int main()
         test.AddCustomer(make_shared<CCustomerTest>(100));
 
     test.Start(nThreads);
-    for(unsigned i = 0; i < 300000000; i++) {}
     test.Stop();
 
     for(auto& i : producerAsync)
