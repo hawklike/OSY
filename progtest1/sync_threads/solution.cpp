@@ -29,6 +29,12 @@
 using namespace std;
 #endif /* __PROGTEST__ */
 
+//todo write buffer wrapper
+struct TBufferWrapper
+{
+
+};
+
 class CWeldingCompany
 {
 public:
@@ -78,8 +84,8 @@ public:
             dbsPriceLists[materialID] = std::make_pair(producers, priceLists);
         }
 
-        //maybe notify_all? IDK
-        cvMapNotAllProd.notify_one();
+        //todo think about right approach
+        cvMapNotAllProd.notify_all();
     }
 
     void Start(unsigned thrCount)
@@ -95,10 +101,10 @@ public:
 
     void Stop()
     {
-
         for(auto& customerThr : customerThreads)
             customerThr.join();
 
+        //todo fix deadlock which happens here
         for(auto& producerThr : workingThreads)
             producerThr.join();
     }
@@ -116,7 +122,6 @@ private:
             std::unique_lock<std::mutex> lockBuffer(mtxBuffer);
             cvFull.wait(lockBuffer, [this] ()
             {
-                //todo if not working, maybe change to a constant, such as 1000?
                 return buffer.size() < nWorkingThreads;
             });
 
@@ -133,11 +138,11 @@ private:
      */
     void evaluateOrders()
     {
+        //todo solve a while cycle, fix it to a correct solution (if so)
         std::unique_lock<std::mutex> lockBuffer(mtxBuffer);
         while(!(finishedCustomers == nCustomers && buffer.empty()))
         {
             lockBuffer.unlock();
-
             std::pair<ACustomer, AOrderList> orderList;
 
             popBuffer(orderList); //checked
@@ -157,8 +162,6 @@ private:
             orderList.first.get()->Completed(orderList.second);
             lockBuffer.lock();
         }
-
-//        finishedWorkingThreads++;
     }
 
     /*
@@ -216,6 +219,7 @@ private:
                 producer.get()->SendPriceList(materialID);
         }
 
+        //todo is my wait method well implemented?
         lockDbsPriceLists.lock();
         cvMapNotAllProd.wait(lockDbsPriceLists, [this, &materialID] ()
         {
@@ -228,7 +232,6 @@ private:
      */
     void createPriceList(const unsigned int& materialID, const APriceList& tmp)
     {
-        //todo maybe this lock is not necessary
         std::unique_lock<std::mutex> lockDbsPriceLists(mtxDbsPriceLists);
         const std::set<APriceList>& priceLists = dbsPriceLists.at(materialID).second;
         lockDbsPriceLists.unlock();
@@ -259,7 +262,6 @@ private:
     unsigned int nProducers = 0;
     unsigned int nCustomers = 0;
     unsigned int finishedCustomers = 0;
-    unsigned int finishedWorkingThreads = 0;
     unsigned int nWorkingThreads = 0;
 
     std::vector<AProducer> producers;
@@ -275,6 +277,7 @@ private:
 
     std::mutex mtxBuffer;
     std::mutex mtxDbsPriceLists;
+    std::mutex mtxFinished; //deprecated
 
     std::condition_variable cvFull;
     std::condition_variable cvEmpty;
@@ -283,32 +286,13 @@ private:
 
 //-------------------------------------------------------------------------------------------------
 #ifndef __PROGTEST__
-//int                main                                    ( void )
-//{
-//
-//    using namespace std::placeholders;
-//    CWeldingCompany  test;
-//
-//    AProducer p1 = make_shared<CProducerSync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-////    AProducerAsync p2 = make_shared<CProducerAsync> ( bind ( &CWeldingCompany::AddPriceList, &test, _1, _2 ) );
-//    test . AddProducer ( p1 );
-////    test . AddProducer ( p2 );
-//    test . AddCustomer ( make_shared<CCustomerTest> ( 9 ) );
-////    p2 -> Start ();
-//    test . Start ( 100 );
-//    test . Stop ();
-////    p2 -> Stop ();
-//    return 0;
-//}
-
 
 int main()
 {
     using namespace std::placeholders;
     CWeldingCompany test;
 
-    //todo fix a deadlock which this test produces
-    const unsigned nThreads = 5;
+    const unsigned nThreads = 10;
     const unsigned nProducers = 1;
     const unsigned nCustomers = 1;
 
@@ -325,13 +309,14 @@ int main()
     }
 
     for(unsigned i = 0; i < nCustomers; i++)
-        test.AddCustomer(make_shared<CCustomerTest>(2));
+        test.AddCustomer(make_shared<CCustomerTest>(100));
 
     test.Start(nThreads);
+    for(unsigned i = 0; i < 300000000; i++) {}
     test.Stop();
 
-    for(unsigned i = 0; i < nThreads; i++)
-        producerAsync[i]->Stop();
+    for(auto& i : producerAsync)
+        i->Stop();
 
     return 0;
 }

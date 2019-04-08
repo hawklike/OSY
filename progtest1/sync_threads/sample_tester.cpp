@@ -108,6 +108,7 @@ AOrderList         CCustomerTest::WaitForDemand            ( void )
 //-------------------------------------------------------------------------------------------------
 void               CCustomerTest::Completed                ( AOrderList        x )
 {
+  counter++;
   bool mismatch = false;
   
   for ( size_t i = 0; i < c_Orders . size (); i ++ )
@@ -117,7 +118,7 @@ void               CCustomerTest::Completed                ( AOrderList        x
       break;
     }
 
-  printf ( "CCustomerTest::Completed %d, status = %s\n", counter++, mismatch ? "fail" : "OK" );
+  printf ( "CCustomerTest::Completed %d, status = %s\n", counter, mismatch ? "fail" : "OK" );
 }
 //-------------------------------------------------------------------------------------------------
 vector<pair<COrder, double> > CCustomerTest::c_Orders = 
